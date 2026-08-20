@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  
+  --color-lex-black: #0A0A0A;
+  --color-lex-white: #FFFFFF;
+  --color-lex-soft: #F6F6F4;
+  --color-lex-purple: #6E38FF;
+  --color-lex-purple-start: #5632FF;
+  --color-lex-purple-end: #A85BFF;
+  --color-lex-yellow: #FFD21C;
+
+  --color-brand-ac: #8CD6F5; /* Ice blue */
+  --color-brand-network: #1E3A8A; /* Deep blue */
+  --color-brand-comp: #8B5CF6; /* Electric violet */
+  --color-brand-barber: #F59E0B; /* Warm amber */
+  --color-brand-coffee: #78350F; /* Mocha brown */
+  --color-brand-pet: #FDE047; /* Bright yellow */
+
+  --radius-full: 9999px;
+  --radius-xl: 1.25rem; /* 20px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-3xl: 2rem; /* 32px */
+  --radius-4xl: 2.5rem; /* 40px */
+  --radius-5xl: 3rem; /* 48px */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-lex-white);
+    color: var(--color-lex-black);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Hide scrollbar for horizontal scroll areas but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
