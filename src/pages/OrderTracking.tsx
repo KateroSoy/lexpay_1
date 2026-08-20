@@ -18,7 +18,7 @@ export default function OrderTracking() {
           <div className="bg-lex-soft rounded-3xl p-8 mb-12 flex flex-col sm:flex-row items-center gap-8">
             <div className="w-24 h-24 bg-brand-ac/20 rounded-full flex items-center justify-center shrink-0 overflow-hidden">
                {/* Avatar placeholder */}
-               <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Technician" className="w-full h-full object-cover" />
+               <img src="/0845644f-e51e-4752-90ff-0d73ea89a928.jfif" alt="Technician" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-2xl font-bold mb-2">Teknisi sedang menuju lokasi</h2>
