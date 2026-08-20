@@ -59,7 +59,7 @@ export default function Orders() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
                 <div className="w-16 h-16 bg-gray-100 rounded-2xl overflow-hidden">
-                  <img src="/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif" alt="Keyboard" className="w-full h-full object-cover mix-blend-multiply" />
+                  <img src="/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif" alt="Keyboard" className="w-full h-full object-cover mix-blend-multiply" />
                 </div>
                 <div>
                   <div className="font-bold text-lg mb-1">LEX Comp</div>

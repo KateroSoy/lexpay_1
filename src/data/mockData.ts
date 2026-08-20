@@ -48,8 +48,8 @@ export const mockProducts: Product[] = [
     brand: "LEX Comp",
     category: "Electronics",
     price: 799000,
-    image: "/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif",
-    gallery: ["/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif"],
+    image: "/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif",
+    gallery: ["/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif"],
     rating: 4.8,
     reviewCount: 124,
     stock: 15,
@@ -78,8 +78,8 @@ export const mockProducts: Product[] = [
     brand: "LEX Coffee",
     category: "Food",
     price: 28000,
-    image: "/70f1795e-dcf8-4a23-b085-4f2484812d3c.jfif",
-    gallery: ["/70f1795e-dcf8-4a23-b085-4f2484812d3c.jfif"],
+    image: "/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif",
+    gallery: ["/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif"],
     rating: 4.7,
     reviewCount: 89,
     stock: 20,
@@ -98,7 +98,7 @@ export const mockServices: Service[] = [
     description: "Servis, cleaning dan perawatan AC langsung dari teknisi profesional dengan garansi 30 hari.",
     startingPrice: 75000,
     duration: "1-2 Hours",
-    image: "/73ab8ef6-ad89-4276-a52b-3300e2d8bc23.jfif",
+    image: "/d9e9c6d3-b186-49c3-b614-57989dfeb1ce.jfif",
     availability: ["09:00", "11:30", "14:00", "16:30"],
     coverageArea: ["Jakarta", "Depok", "Tangerang", "Bekasi"],
     options: [
@@ -135,7 +135,7 @@ export const mockServices: Service[] = [
     description: "Potong rambut premium dengan barber profesional, styling, dan hot towel shave.",
     startingPrice: 35000,
     duration: "45 Mins",
-    image: "/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif",
+    image: "/73ab8ef6-ad89-4276-a52b-3300e2d8bc23.jfif",
     availability: ["10:00", "11:00", "13:00", "15:00", "17:00", "19:00"],
     coverageArea: ["Kebayoran", "Kemang"],
     options: [
@@ -154,7 +154,7 @@ export const mockDigital: DigitalProduct[] = [
     provider: "Moonton",
     category: "Game",
     instantDelivery: true,
-    image: "/d1f2905e-66e4-40a8-87e0-5dca5f4d6b9f.jfif",
+    image: "/0845644f-e51e-4752-90ff-0d73ea89a928.jfif",
     denominations: [
       { id: "ml1", name: "86 Diamonds", price: 25000 },
       { id: "ml2", name: "172 Diamonds", price: 50000 },
@@ -167,7 +167,7 @@ export const mockDigital: DigitalProduct[] = [
     provider: "Telkomsel",
     category: "Mobile",
     instantDelivery: true,
-    image: "/d9e9c6d3-b186-49c3-b614-57989dfeb1ce.jfif",
+    image: "/d1f2905e-66e4-40a8-87e0-5dca5f4d6b9f.jfif",
     denominations: [
       { id: "tsel1", name: "Rp50.000", price: 51000 },
       { id: "tsel2", name: "Rp100.000", price: 100000 }

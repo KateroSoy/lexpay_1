@@ -38,7 +38,7 @@ export default function Cart() {
               <div className="bg-white rounded-3xl p-6 shadow-sm border border-black/5">
                 <div className="flex items-center gap-6">
                   <div className="w-24 h-24 bg-gray-100 rounded-2xl overflow-hidden shrink-0">
-                    <img src="/2becdfcb-8ec1-4fcc-b59e-182ec056b956.jfif" alt="Keyboard" className="w-full h-full object-cover mix-blend-multiply" />
+                    <img src="/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif" alt="Keyboard" className="w-full h-full object-cover mix-blend-multiply" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-lg">Mechanical Keyboard Pro X</h3>
