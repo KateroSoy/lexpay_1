@@ -2,14 +2,15 @@ import { useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { PiHouse, PiCompass, PiPackage, PiUser, PiMagnifyingGlass } from "react-icons/pi";
+import { PiHouse, PiCompass, PiPackage, PiUser, PiTote } from "react-icons/pi";
 import { cn } from "../lib/utils";
 import { Toaster } from "react-hot-toast";
-import { useThemeStore } from "../lib/store";
+import { useThemeStore, useCartStore } from "../lib/store";
 
 export function Layout() {
   const location = useLocation();
   const theme = useThemeStore((state) => state.theme);
+  const cartItemCount = useCartStore((state) => state.getItemCount());
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -65,10 +66,15 @@ export function Layout() {
           {/* Center Floating Button */}
           <div className="relative -top-6 flex justify-center w-16">
             <Link 
-              to="/search" 
-              className="w-14 h-14 bg-lex-purple rounded-full flex items-center justify-center border-[6px] border-white shadow-md text-text-primary transition-transform active:scale-95"
+              to="/cart" 
+              className="relative w-14 h-14 bg-lex-purple rounded-full flex items-center justify-center border-[6px] border-bg-card shadow-md text-white transition-transform active:scale-95"
             >
-              <PiMagnifyingGlass className="w-5 h-5" fill="none" strokeWidth={2.5} />
+              <PiTote className="w-6 h-6" fill="none" strokeWidth={2.5} />
+              {cartItemCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-bg-card">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
           </div>
 

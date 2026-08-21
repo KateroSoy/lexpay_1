@@ -95,13 +95,8 @@ export function Header() {
                 <PiMoon className="h-5 w-5 text-black" strokeWidth={1.5} />
               )}
             </button>
-            <Link to="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <PiTote className="h-5 w-5 text-text-primary" strokeWidth={2} />
-              {cartItemCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-lex-purple text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-bg-main">
-                  {cartItemCount}
-                </span>
-              )}
+            <Link to="/search" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+              <PiMagnifyingGlass className="h-5 w-5 text-text-primary" strokeWidth={2} />
             </Link>
             <button 
               className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
