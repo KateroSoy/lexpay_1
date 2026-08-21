@@ -144,6 +144,101 @@ export const mockServices: Service[] = [
     ],
     rating: 4.9,
     slug: "premium-haircut"
+  },
+  {
+    id: "s4",
+    name: "Web Development",
+    provider: "LEX Studio",
+    category: "Digital Agency",
+    description: "Jasa pembuatan website profesional, company profile, e-commerce, dan landing page yang responsif & modern.",
+    startingPrice: 1500000,
+    duration: "7-14 Days",
+    image: "/web_dev_service.png",
+    availability: ["Consultation: 10:00 - 17:00"],
+    coverageArea: ["Global", "Remote", "Jakarta"],
+    options: [
+      { name: "Landing Page", price: 1500000 },
+      { name: "Company Profile", price: 3500000 },
+      { name: "E-Commerce Basic", price: 5000000 }
+    ],
+    rating: 5.0,
+    slug: "jasa-web-development"
+  },
+  {
+    id: "s5",
+    name: "Mobile App Development",
+    provider: "LEX Studio",
+    category: "Digital Agency",
+    description: "Pembuatan aplikasi mobile iOS & Android (Flutter/React Native) dengan performa tinggi dan UI/UX interaktif.",
+    startingPrice: 5000000,
+    duration: "1-3 Months",
+    image: "/mobile_app_service.png",
+    availability: ["Consultation: 10:00 - 17:00"],
+    coverageArea: ["Global", "Remote"],
+    options: [
+      { name: "UI/UX Prototype Only", price: 2000000 },
+      { name: "Basic App (1 Platform)", price: 5000000 },
+      { name: "Full App (iOS & Android)", price: 9000000 }
+    ],
+    rating: 4.9,
+    slug: "mobile-app-development"
+  },
+  {
+    id: "s6",
+    name: "AI Application Development",
+    provider: "LEX Studio",
+    category: "Digital Agency",
+    description: "Integrasi sistem AI (LLM, Computer Vision, Data Science) ke dalam bisnis Anda untuk automasi tingkat lanjut.",
+    startingPrice: 10000000,
+    duration: "2-4 Months",
+    image: "/ai_app_service.png",
+    availability: ["Consultation: 10:00 - 17:00"],
+    coverageArea: ["Global", "Remote"],
+    options: [
+      { name: "AI Chatbot Integration", price: 4000000 },
+      { name: "Custom LLM Fine-tuning", price: 10000000 },
+      { name: "Full AI Agent System", price: 25000000 }
+    ],
+    rating: 5.0,
+    slug: "ai-app-development"
+  },
+  {
+    id: "s7",
+    name: "UI/UX Design",
+    provider: "LEX Studio",
+    category: "Digital Agency",
+    description: "Jasa desain antarmuka dan pengalaman pengguna (UI/UX) premium menggunakan Figma untuk web dan aplikasi.",
+    startingPrice: 800000,
+    duration: "3-10 Days",
+    image: "/ui_ux_service.png",
+    availability: ["Consultation: 10:00 - 17:00"],
+    coverageArea: ["Global", "Remote"],
+    options: [
+      { name: "Landing Page Design", price: 800000 },
+      { name: "Mobile App Design (5 Screens)", price: 1500000 },
+      { name: "Full Web/App Design System", price: 4000000 }
+    ],
+    rating: 4.8,
+    slug: "ui-ux-design"
+  },
+  {
+    id: "s8",
+    name: "Custom Software Solutions",
+    provider: "LEX Studio",
+    category: "Digital Agency",
+    description: "Pembuatan software ERP, CRM, POS, dan sistem informasi manajemen custom sesuai kebutuhan perusahaan Anda.",
+    startingPrice: 8000000,
+    duration: "1-6 Months",
+    image: "/software_service.png",
+    availability: ["Consultation: 10:00 - 17:00"],
+    coverageArea: ["Global", "Remote"],
+    options: [
+      { name: "Custom POS System", price: 8000000 },
+      { name: "Web-based CRM", price: 12000000 },
+      { name: "Full Enterprise ERP", price: 30000000 }
+    ],
+    rating: 4.9,
+    slug: "custom-software-solutions"
   }
 ];
 
