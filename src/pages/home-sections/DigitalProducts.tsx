@@ -9,7 +9,7 @@ export function DigitalProducts() {
       
       <div className="relative z-10 mx-auto max-w-7xl flex flex-col lg:flex-row gap-16 items-center">
         <div className="flex-1">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6">
             Digital stuff.<br />Instantly delivered.
           </h2>
           <p className="text-xl md:text-2xl text-white/80 font-medium max-w-lg mb-10">

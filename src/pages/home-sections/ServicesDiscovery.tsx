@@ -3,10 +3,10 @@ export function ServicesDiscovery() {
     <section className="py-32 px-4 bg-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-20">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-4">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-4">
             Something needs fixing?
           </h2>
-          <h3 className="text-4xl md:text-5xl font-black text-black/40">
+          <h3 className="text-3xl md:text-4xl font-black text-black/40">
             There's a LEX for that.
           </h3>
         </div>

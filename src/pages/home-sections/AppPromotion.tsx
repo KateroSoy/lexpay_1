@@ -2,7 +2,7 @@ export function AppPromotion() {
   return (
     <section className="py-32 px-4 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl flex flex-col items-center text-center">
-        <h2 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-6">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-6">
           LEXPAY in your pocket.
         </h2>
         <p className="text-xl md:text-2xl text-black/60 font-medium mb-12 max-w-2xl">

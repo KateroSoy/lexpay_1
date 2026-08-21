@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import { mockProducts, mockServices, mockDigital } from "../data/mockData";
+import { useCartStore } from "../lib/store";
+import toast from "react-hot-toast";
 
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const [activeTab, setActiveTab] = useState("all");
+  const addItem = useCartStore((state) => state.addItem);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,7 +47,7 @@ export default function Search() {
         </form>
 
         {query && (
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-8">
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight mb-8">
             Results for "{query}"
           </h1>
         )}
@@ -117,13 +120,39 @@ export default function Search() {
               <h2 className="text-2xl font-bold mb-6">Digital</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {matchedDigital.map(digital => (
-                  <div key={digital.id} className="bg-white rounded-[32px] p-6 border border-black/5 hover:border-lex-purple/30 transition-colors cursor-pointer">
+                  <div key={digital.id} className="bg-white rounded-[32px] p-6 border border-black/5">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-lex-purple/10 rounded-xl flex items-center justify-center text-lex-purple font-bold">DIG</div>
+                      <div className="w-16 h-16 bg-lex-soft rounded-2xl overflow-hidden p-2">
+                        <img src={digital.image} alt={digital.name} className="w-full h-full object-cover rounded-xl" />
+                      </div>
                       <div>
                         <h3 className="font-bold">{digital.name}</h3>
-                        <p className="text-sm text-black/60 font-medium">Instant Delivery</p>
+                        <p className="text-sm text-black/60 font-medium">{digital.provider}</p>
                       </div>
+                    </div>
+                    <div className="space-y-2 mt-4">
+                      {digital.denominations.slice(0, 2).map(denom => (
+                         <button 
+                           key={denom.id} 
+                           onClick={() => {
+                             addItem({
+                               id: `${digital.id}-${denom.id}`,
+                               productId: digital.id,
+                               type: 'digital',
+                               name: digital.name,
+                               price: denom.price,
+                               quantity: 1,
+                               image: digital.image,
+                               metadata: { digitalInfo: denom.name, provider: digital.provider }
+                             });
+                             toast.success(`${denom.name} added to cart!`);
+                           }}
+                           className="w-full flex justify-between items-center p-3 rounded-xl border border-black/5 hover:border-lex-purple transition-colors cursor-pointer text-left"
+                         >
+                           <span className="font-semibold text-sm">{denom.name}</span>
+                           <span className="font-bold">Rp{denom.price.toLocaleString('id-ID')}</span>
+                         </button>
+                      ))}
                     </div>
                   </div>
                 ))}

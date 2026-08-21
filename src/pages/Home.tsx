@@ -8,16 +8,18 @@ import { Recommendations } from "./home-sections/Recommendations";
 import { OneCheckout } from "./home-sections/OneCheckout";
 import { CoffeePetshop } from "./home-sections/CoffeePetshop";
 import { AppPromotion, FinalCTA } from "./home-sections/AppPromotion";
+import { FeaturedProducts } from "./home-sections/FeaturedProducts";
 
 export default function Home() {
   return (
     <div className="bg-lex-white">
       <Hero />
+      <DigitalProducts />
+      <FeaturedProducts />
       <Trust />
       <Ecosystem />
       <ShopServices />
       <ServicesDiscovery />
-      <DigitalProducts />
       <Recommendations />
       <CoffeePetshop />
       <OneCheckout />

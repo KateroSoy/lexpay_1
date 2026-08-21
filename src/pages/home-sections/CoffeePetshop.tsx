@@ -20,7 +20,7 @@ export function CoffeePetshop() {
           </div>
           <div className="order-1 md:order-2 max-w-lg">
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#78350F]/10 text-[#78350F] font-bold text-sm mb-6 tracking-widest uppercase">LEX Coffee</span>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tight text-[#3C1E0A] mb-6">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[#3C1E0A] mb-6">
               Your coffee.<br />Your way.
             </h2>
             <p className="text-xl md:text-2xl text-[#3C1E0A]/60 font-medium mb-10">
@@ -40,7 +40,7 @@ export function CoffeePetshop() {
         <div className="mx-auto max-w-7xl relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="max-w-lg">
             <span className="inline-block px-4 py-1.5 rounded-full bg-black/10 text-black font-bold text-sm mb-6 tracking-widest uppercase">Merdeka Petshop</span>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-6">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-6">
               Everything for<br />your best friend.
             </h2>
             <p className="text-xl md:text-2xl text-black/70 font-medium mb-10">
@@ -53,7 +53,7 @@ export function CoffeePetshop() {
           <div className="w-full aspect-[4/3] md:aspect-square bg-white/20 rounded-[48px] backdrop-blur-sm border border-white/40 p-12 flex flex-col justify-center items-center relative">
              {/* Abstract Pet shapes */}
              <div className="w-48 h-48 bg-white rounded-full shadow-lg relative z-10 flex items-center justify-center">
-               <div className="text-5xl">🐕</div>
+               <div className="text-4xl">🐕</div>
              </div>
              <div className="w-32 h-32 bg-lex-black rounded-full shadow-lg absolute right-16 bottom-16 flex items-center justify-center">
                <div className="text-4xl">🐈</div>

@@ -32,6 +32,38 @@ const recommendations = [
     bg: "bg-[#DBEAFE]",
     text: "text-[#1E3A8A]",
     btn: "bg-[#1E3A8A] text-white"
+  },
+  {
+    time: "Self Care",
+    title: "Time for a fresh cut.",
+    brand: "LEX Barber",
+    bg: "bg-[#FCE7F3]",
+    text: "text-[#9D174D]",
+    btn: "bg-[#9D174D] text-white"
+  },
+  {
+    time: "Pets",
+    title: "Stock up on pet food.",
+    brand: "Merdeka Petshop",
+    bg: "bg-[#FEF3C7]",
+    text: "text-[#B45309]",
+    btn: "bg-[#B45309] text-white"
+  },
+  {
+    time: "Play",
+    title: "Top up your diamonds.",
+    brand: "LEX Digital",
+    bg: "bg-[#ECFDF5]",
+    text: "text-[#047857]",
+    btn: "bg-[#047857] text-white"
+  },
+  {
+    time: "Home",
+    title: "Need help cleaning?",
+    brand: "LEX Clean",
+    bg: "bg-[#FEE2E2]",
+    text: "text-[#B91C1C]",
+    btn: "bg-[#B91C1C] text-white"
   }
 ];
 
@@ -39,7 +71,7 @@ export function Recommendations() {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-16">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-16">
           Made for your day.
         </h2>
         

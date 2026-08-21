@@ -2,11 +2,29 @@ import { useParams, Link } from "react-router-dom";
 import { mockProducts } from "../data/mockData";
 import { ArrowLeft, Star, Truck } from "lucide-react";
 import { useState } from "react";
+import { useCartStore } from "../lib/store";
+import toast from "react-hot-toast";
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const product = mockProducts.find(p => p.slug === slug) || mockProducts[0];
   const [qty, setQty] = useState(1);
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0] || "");
+  const addItem = useCartStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: `${product.id}-${selectedVariant}`,
+      productId: product.id,
+      type: 'product',
+      name: product.name,
+      price: product.price,
+      quantity: qty,
+      image: product.image,
+      metadata: { variant: selectedVariant }
+    });
+    toast.success(`${qty}x ${product.name} added to cart!`);
+  };
 
   return (
     <div className="pt-24 pb-24 bg-white min-h-screen">
@@ -34,7 +52,7 @@ export default function ProductDetail() {
             <div className="inline-block px-4 py-1.5 rounded-full bg-black/5 text-black/60 font-bold text-sm w-fit mb-4">
               {product.brand}
             </div>
-            <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4">{product.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-4">{product.name}</h1>
             
             <div className="flex items-center gap-4 mb-8">
               <div className="flex items-center gap-1 text-lex-purple font-bold">
@@ -52,7 +70,11 @@ export default function ProductDetail() {
                 <div className="font-bold mb-4">Select Variant</div>
                 <div className="flex gap-3">
                   {product.variants.map((v, i) => (
-                    <button key={i} className={`px-6 py-3 rounded-full font-semibold border ${i === 0 ? 'border-lex-black bg-lex-black text-white' : 'border-black/10 bg-white text-black hover:border-black/30'}`}>
+                    <button 
+                      key={i} 
+                      onClick={() => setSelectedVariant(v)}
+                      className={`px-6 py-3 rounded-full font-semibold border ${selectedVariant === v ? 'border-lex-black bg-lex-black text-white' : 'border-black/10 bg-white text-black hover:border-black/30'}`}
+                    >
                       {v}
                     </button>
                   ))}
@@ -67,7 +89,7 @@ export default function ProductDetail() {
                 <span className="font-bold text-lg">{qty}</span>
                 <button onClick={() => setQty(qty+1)} className="text-black/40 hover:text-black font-bold text-xl">+</button>
               </div>
-              <button className="flex-1 bg-lex-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black/90 active:scale-95 transition-all">
+              <button onClick={handleAddToCart} className="flex-1 bg-lex-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black/90 active:scale-95 transition-all cursor-pointer">
                 Tambah ke Keranjang
               </button>
             </div>

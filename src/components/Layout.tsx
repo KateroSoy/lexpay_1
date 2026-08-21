@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Home, Compass, Package, User } from "lucide-react";
 import { cn } from "../lib/utils";
+import { Toaster } from "react-hot-toast";
 
 export function Layout() {
   const location = useLocation();
@@ -16,6 +17,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-lex-white text-lex-black pb-20 md:pb-0">
+      <Toaster position="bottom-center" />
       <Header />
       <main className="flex-1">
         <Outlet />

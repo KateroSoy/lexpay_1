@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../lib/store";
 
 export default function Orders() {
   const [activeTab, setActiveTab] = useState("all");
+  const orders = useUserStore(state => state.orders);
 
+  // For this demo, let's just show all orders, flattening their items for display, 
+  // or show one block per order.
+  
   return (
     <div className="pt-32 pb-24 px-4 bg-lex-soft min-h-screen">
       <div className="mx-auto max-w-5xl">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-lex-black mb-12">My Orders</h1>
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-12">My Orders</h1>
 
         <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mb-8">
-          {["All", "Products", "Services", "Digital"].map(cat => (
+          {["All", "Processing", "Completed"].map(cat => (
             <button 
               key={cat}
               onClick={() => setActiveTab(cat.toLowerCase())}
@@ -25,73 +30,56 @@ export default function Orders() {
           ))}
         </div>
 
-        <div className="space-y-6">
-          {/* Order 1: Service */}
-          <Link to="/orders/1" className="block bg-white rounded-[32px] p-8 border border-black/5 hover:border-black/10 transition-colors">
-            <div className="flex justify-between items-center border-b border-black/5 pb-6 mb-6">
-              <div className="flex items-center gap-4">
-                <span className="font-bold">LEX AC Cleaning</span>
-                <span className="bg-brand-ac/20 text-brand-ac px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Scheduled</span>
-              </div>
-              <div className="text-black/50 font-medium text-sm">Tomorrow · 10:00</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-brand-ac/10 rounded-2xl flex items-center justify-center text-brand-ac font-bold">AC</div>
-                <div>
-                  <div className="font-bold text-lg mb-1">AC Cleaning - Basic</div>
-                  <div className="text-black/60 font-medium text-sm">Technician: Menunggu konfirmasi</div>
-                </div>
-              </div>
-              <div className="font-bold text-xl">Rp75.000</div>
-            </div>
-          </Link>
-
-          {/* Order 2: Product */}
-          <div className="bg-white rounded-[32px] p-8 border border-black/5">
-            <div className="flex justify-between items-center border-b border-black/5 pb-6 mb-6">
-              <div className="flex items-center gap-4">
-                <span className="font-bold">Mechanical Keyboard Pro X</span>
-                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">On Delivery</span>
-              </div>
-              <div className="text-black/50 font-medium text-sm">Est. 22 Aug</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-gray-100 rounded-2xl overflow-hidden">
-                  <img src="/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif" alt="Keyboard" className="w-full h-full object-cover mix-blend-multiply" />
-                </div>
-                <div>
-                  <div className="font-bold text-lg mb-1">LEX Comp</div>
-                  <div className="text-black/60 font-medium text-sm">Resi: JNT123456789</div>
-                </div>
-              </div>
-              <div className="font-bold text-xl">Rp799.000</div>
-            </div>
+        {orders.length === 0 ? (
+          <div className="text-center py-24 bg-white rounded-[32px]">
+            <h2 className="text-2xl font-bold mb-4">No orders yet</h2>
+            <Link to="/explore" className="text-lex-purple font-bold hover:underline">Start shopping</Link>
           </div>
+        ) : (
+          <div className="space-y-6">
+            {orders.filter(o => activeTab === 'all' || o.status === activeTab).map(order => (
+              <div key={order.id} className="bg-white rounded-[32px] p-8 border border-black/5 hover:border-black/10 transition-colors">
+                <div className="flex justify-between items-center border-b border-black/5 pb-6 mb-6">
+                  <div className="flex items-center gap-4">
+                    <span className="font-bold">Order {order.id}</span>
+                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                      {order.status}
+                    </span>
+                  </div>
+                  <div className="text-black/50 font-medium text-sm">
+                    {new Date(order.date).toLocaleString('id-ID')}
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  {order.items.map(item => (
+                    <div key={item.id} className="flex items-center justify-between">
+                      <div className="flex items-center gap-6">
+                        <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden font-bold">
+                          {item.type === 'service' ? (item.metadata?.provider || 'SVC') : (
+                            item.image ? <img src={item.image} className="w-full h-full object-cover" /> : item.type.substring(0,2).toUpperCase()
+                          )}
+                        </div>
+                        <div>
+                          <div className="font-bold text-lg mb-1">{item.name}</div>
+                          <div className="text-black/60 font-medium text-sm">
+                            {item.quantity}x • {item.type === 'product' && item.metadata?.variant ? `Variant: ${item.metadata.variant}` : ''}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="font-bold text-xl">Rp{(item.price * item.quantity).toLocaleString('id-ID')}</div>
+                    </div>
+                  ))}
+                </div>
 
-          {/* Order 3: Digital */}
-          <div className="bg-white rounded-[32px] p-8 border border-black/5 opacity-70">
-            <div className="flex justify-between items-center border-b border-black/5 pb-6 mb-6">
-              <div className="flex items-center gap-4">
-                <span className="font-bold">Mobile Legends Diamonds</span>
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Completed</span>
-              </div>
-              <div className="text-black/50 font-medium text-sm">Today · 14:30</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-lex-purple/10 rounded-2xl flex items-center justify-center text-lex-purple font-bold">ML</div>
-                <div>
-                  <div className="font-bold text-lg mb-1">172 Diamonds</div>
-                  <div className="text-black/60 font-medium text-sm">ID: 1234567</div>
+                <div className="mt-8 pt-6 border-t border-black/5 flex justify-between items-center">
+                  <div className="text-black/60 font-medium">Payment: {order.paymentMethod}</div>
+                  <div className="text-2xl font-black text-lex-purple">Total: Rp{order.total.toLocaleString('id-ID')}</div>
                 </div>
               </div>
-              <div className="font-bold text-xl">Rp50.000</div>
-            </div>
+            ))}
           </div>
-
-        </div>
+        )}
       </div>
     </div>
   );

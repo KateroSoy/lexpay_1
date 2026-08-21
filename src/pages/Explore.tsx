@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { mockProducts, mockServices, mockDigital } from "../data/mockData";
 import { Link, useLocation } from "react-router-dom";
+import { useCartStore } from "../lib/store";
+import toast from "react-hot-toast";
 
 export default function Explore() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("all");
+  const addItem = useCartStore((state) => state.addItem);
 
   useEffect(() => {
     // Basic routing to tabs based on URL path
@@ -18,7 +21,7 @@ export default function Explore() {
   return (
     <div className="pt-32 pb-24 px-4 bg-lex-soft min-h-screen">
       <div className="mx-auto max-w-7xl">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-8">
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-8">
           Explore Ecosystem
         </h1>
         
@@ -119,10 +122,26 @@ export default function Explore() {
                       </div>
                       <div className="space-y-2 mt-6">
                         {digital.denominations.slice(0,2).map(denom => (
-                           <div key={denom.id} className="flex justify-between items-center p-3 rounded-xl border border-black/5 hover:border-lex-purple transition-colors">
+                           <button 
+                             key={denom.id} 
+                             onClick={() => {
+                               addItem({
+                                 id: `${digital.id}-${denom.id}`,
+                                 productId: digital.id,
+                                 type: 'digital',
+                                 name: digital.name,
+                                 price: denom.price,
+                                 quantity: 1,
+                                 image: digital.image,
+                                 metadata: { digitalInfo: denom.name, provider: digital.provider }
+                               });
+                               toast.success(`${denom.name} added to cart!`);
+                             }}
+                             className="w-full flex justify-between items-center p-3 rounded-xl border border-black/5 hover:border-lex-purple transition-colors cursor-pointer text-left"
+                           >
                              <span className="font-semibold text-sm">{denom.name}</span>
                              <span className="font-bold">Rp{denom.price.toLocaleString('id-ID')}</span>
-                           </div>
+                           </button>
                         ))}
                       </div>
                     </div>

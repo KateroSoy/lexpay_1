@@ -13,7 +13,7 @@ export function Ecosystem() {
   return (
     <section className="py-32 bg-lex-black text-white px-4 overflow-hidden">
       <div className="mx-auto max-w-7xl mb-16 md:mb-24">
-        <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6 leading-tight">
           Meet the<br />LEX ecosystem.
         </h2>
         <p className="text-xl md:text-2xl text-white/60 max-w-2xl font-medium">

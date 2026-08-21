@@ -2,11 +2,29 @@ import { useParams, Link } from "react-router-dom";
 import { mockServices } from "../data/mockData";
 import { ArrowLeft, Star, Clock, MapPin, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { useCartStore } from "../lib/store";
+import toast from "react-hot-toast";
 
 export default function ServiceDetail() {
   const { slug } = useParams();
   const service = mockServices.find(s => s.slug === slug) || mockServices[0];
   const [selectedOption, setSelectedOption] = useState(0);
+  const addItem = useCartStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    const option = service.options[selectedOption];
+    addItem({
+      id: `${service.id}-${option.name}`,
+      productId: service.id,
+      type: 'service',
+      name: `${service.name} - ${option.name}`,
+      price: option.price,
+      quantity: 1,
+      image: service.image,
+      metadata: { variant: option.name, provider: service.provider }
+    });
+    toast.success(`${service.name} added to cart!`);
+  };
 
   return (
     <div className="pt-24 pb-24 bg-white min-h-screen">
@@ -30,7 +48,7 @@ export default function ServiceDetail() {
                  <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white font-bold text-sm w-fit mb-4">
                    {service.provider}
                  </span>
-                 <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">{service.name}</h1>
+                 <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">{service.name}</h1>
                </div>
             </div>
 
@@ -95,8 +113,8 @@ export default function ServiceDetail() {
                 </div>
               </div>
 
-              <button className="w-full bg-lex-black text-white py-5 rounded-full font-bold text-lg hover:bg-black/90 active:scale-95 transition-all shadow-xl">
-                Pilih Jadwal
+              <button onClick={handleAddToCart} className="w-full bg-lex-black text-white py-5 rounded-full font-bold text-lg hover:bg-black/90 active:scale-95 transition-all shadow-xl cursor-pointer">
+                Tambah ke Keranjang
               </button>
               
               <p className="text-center text-xs font-semibold text-black/40 mt-6">

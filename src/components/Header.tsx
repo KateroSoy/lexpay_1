@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Search, Menu, ShoppingBag, User } from "lucide-react";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCartStore } from "../lib/store";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const cartItemCount = useCartStore((state) => state.getItemCount());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,8 +56,13 @@ export function Header() {
             <Link to="/search" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
               <Search className="h-5 w-5 text-black" strokeWidth={2} />
             </Link>
-            <Link to="/cart" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
+            <Link to="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
               <ShoppingBag className="h-5 w-5 text-black" strokeWidth={2} />
+              {cartItemCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-lex-purple text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
             <Link to="/account" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
               <User className="h-5 w-5 text-black" strokeWidth={2} />
@@ -67,8 +74,13 @@ export function Header() {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-2">
-            <Link to="/cart" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
+            <Link to="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
               <ShoppingBag className="h-5 w-5 text-black" strokeWidth={2} />
+              {cartItemCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-lex-purple text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
             <button 
               className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors"

@@ -6,7 +6,7 @@ export function OneCheckout() {
     <section className="py-32 px-4 bg-lex-soft overflow-hidden">
       <div className="mx-auto max-w-7xl flex flex-col lg:flex-row items-center gap-16">
         <div className="flex-1 max-w-xl">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight text-lex-black mb-6">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-6">
             One cart.<br />Even for services.
           </h2>
           <p className="text-xl md:text-2xl text-black/60 font-medium mb-10">

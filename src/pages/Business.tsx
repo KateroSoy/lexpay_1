@@ -82,7 +82,7 @@ export default function Business() {
 
       {/* CTA Section */}
       <section className="py-32 px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-black mb-8">Ready to upgrade your workspace?</h2>
+        <h2 className="text-3xl md:text-4xl font-black mb-8">Ready to upgrade your workspace?</h2>
         <button className="bg-lex-purple text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-lex-purple-start active:scale-95 transition-all inline-flex items-center gap-3">
           Mulai Konsultasi <ArrowRight className="w-6 h-6" />
         </button>

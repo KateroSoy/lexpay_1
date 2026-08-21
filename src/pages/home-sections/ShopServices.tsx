@@ -8,7 +8,7 @@ export function ShopServices() {
       <div className="bg-lex-soft p-12 md:p-24 min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-lex-soft to-gray-200 opacity-50" />
         <div className="relative z-10 max-w-lg">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-6">Shop anything.</h2>
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6">Shop anything.</h2>
           <Link to="/products" className="flex items-center gap-2 text-xl font-bold bg-white text-lex-black px-8 py-4 rounded-full w-fit group-hover:scale-105 transition-transform shadow-lg">
             Explore Products <ArrowRight className="w-5 h-5" />
           </Link>
@@ -33,7 +33,7 @@ export function ShopServices() {
       <div className="bg-lex-black text-white p-12 md:p-24 min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-lex-black to-gray-900 opacity-50" />
         <div className="relative z-10 max-w-lg">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-6">Book anything.</h2>
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6">Book anything.</h2>
           <Link to="/services" className="flex items-center gap-2 text-xl font-bold bg-white/10 text-white px-8 py-4 rounded-full w-fit group-hover:bg-white/20 group-hover:scale-105 transition-all backdrop-blur-md">
             Explore Services <ArrowRight className="w-5 h-5" />
           </Link>

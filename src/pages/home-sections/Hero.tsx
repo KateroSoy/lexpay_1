@@ -28,7 +28,7 @@ export function Hero() {
           <span className="inline-block py-1.5 px-4 rounded-full bg-black/5 text-sm font-semibold mb-8">
             All-in-One Commerce & Services
           </span>
-          <h1 className="text-5xl sm:text-6xl md:text-[84px] lg:text-[108px] font-black leading-[0.95] tracking-[-0.04em] text-lex-black mb-6">
+          <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-[-0.04em] text-lex-black mb-6">
             Everything you need.<br />
             <span className="text-lex-purple">One LEX away.</span>
           </h1>
