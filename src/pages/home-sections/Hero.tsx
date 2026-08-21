@@ -16,8 +16,8 @@ export function Hero() {
   return (
     <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center pt-16 md:pt-24 pb-20 md:pb-0 px-4">
       {/* Background container that clips decorative elements but allows floating elements */}
-      <div className="absolute inset-0 bg-lex-purple md:bg-bg-main rounded-b-[40px] md:rounded-none overflow-hidden z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-bg-card/10 md:bg-lex-purple/10 rounded-full blur-3xl opacity-50" />
+      <div className="absolute inset-0 bg-bg-main rounded-b-[40px] md:rounded-none overflow-hidden z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-lex-purple/10 rounded-full blur-3xl opacity-50" />
       </div>
       
       <div className="relative z-10 mx-auto max-w-7xl flex flex-col items-center text-center w-full">
@@ -34,14 +34,14 @@ export function Hero() {
             </span>
           </div>
 
-          <span className="inline-block py-1.5 px-4 rounded-full bg-white/20 md:bg-black/5 dark:md:bg-white/10 text-sm font-semibold mb-8 text-white md:text-text-primary">
+          <span className="inline-block py-1.5 px-4 rounded-full bg-black/5 dark:bg-white/10 text-sm font-semibold mb-8 text-text-primary">
             All-in-One Commerce & Services
           </span>
-          <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-[-0.04em] text-white md:text-text-primary mb-6">
+          <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-[-0.04em] text-text-primary mb-6">
             Everything you need.<br />
-            <span className="text-yellow-300 md:text-lex-purple">One LEX away.</span>
+            <span className="text-lex-purple">One LEX away.</span>
           </h1>
-          <p className="max-w-2xl text-base md:text-xl text-white/90 md:text-text-secondary font-medium px-4">
+          <p className="max-w-2xl text-base md:text-xl text-text-secondary font-medium px-4">
             Temukan produk, pesan layanan, bayar kebutuhan harian, dan nikmati seluruh ekosistem LEX dari satu tempat.
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mt-8 px-4"
         >
-          <Link to="/explore" className="w-full sm:w-auto px-8 py-4 bg-bg-card text-lex-purple md:bg-bg-card md:text-text-primary rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all text-center shadow-lg">
+          <Link to="/explore" className="w-full sm:w-auto px-8 py-4 bg-lex-purple text-white rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all text-center shadow-lg">
             Mulai Jelajahi
           </Link>
         </motion.div>

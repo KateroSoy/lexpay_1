@@ -53,13 +53,13 @@ export function AppPromotion() {
 
 export function FinalCTA() {
   return (
-    <section className="bg-bg-main text-white py-40 px-4 text-center">
+    <section className="bg-bg-main py-40 px-4 text-center">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-6xl md:text-8xl font-black tracking-tight mb-12 leading-none">
+        <h2 className="text-6xl md:text-8xl font-black tracking-tight mb-12 leading-none text-text-primary">
           Whatever you need.<br />
           <span className="opacity-60 text-text-secondary">Start with LEX.</span>
         </h2>
-        <button className="bg-bg-card text-white px-12 py-5 rounded-full font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+        <button className="bg-lex-purple text-white px-12 py-5 rounded-full font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(107,33,168,0.3)]">
           Explore LEXPAY
         </button>
       </div>
