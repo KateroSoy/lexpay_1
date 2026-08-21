@@ -9,6 +9,14 @@
   --color-lex-purple: #6E38FF;
   --color-lex-purple-start: #5632FF;
   --color-lex-purple-end: #A85BFF;
+  
+  /* Mobile UI Redesign Colors */
+  --color-lex-purple: #5927E5; 
+  --color-lex-purple-dark: #401BBA;
+  --color-lex-purple-light: #7B4FFF;
+  --color-lex-purple-gradient-start: #6333FF;
+  --color-lex-purple-gradient-end: #4B1EE3;
+
   --color-lex-yellow: #FFD21C;
 
   --color-brand-ac: #8CD6F5; /* Ice blue */

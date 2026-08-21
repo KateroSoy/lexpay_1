@@ -29,19 +29,19 @@ export default function Search() {
       <div className="mx-auto max-w-7xl">
         
         {/* Large Search Input */}
-        <form onSubmit={handleSearch} className="bg-white p-3 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center gap-4 border border-black/5 mb-16 max-w-3xl">
-          <div className="pl-6">
-            <SearchIcon className="w-6 h-6 text-black/40" />
+        <form onSubmit={handleSearch} className="bg-white p-3 md:p-2 rounded-2xl md:rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex max-md:flex-col md:flex-row items-center gap-3 border border-black/5 mb-16 max-w-3xl">
+          <div className="w-full flex items-center px-4 py-2 md:px-4 md:py-0 bg-lex-soft md:bg-transparent rounded-xl md:rounded-none">
+            <SearchIcon className="w-5 h-5 md:w-6 md:h-6 text-black/40 mr-3 shrink-0" />
+            <input 
+              type="text" 
+              name="q"
+              defaultValue={query}
+              placeholder="Cari produk, layanan, atau digital..."
+              className="flex-1 bg-transparent border-none outline-none py-2 md:py-4 text-base md:text-lg placeholder:text-black/40 md:placeholder:text-black/30 font-medium text-black"
+              autoFocus
+            />
           </div>
-          <input 
-            type="text" 
-            name="q"
-            defaultValue={query}
-            placeholder="Cari produk, layanan, atau digital..."
-            className="flex-1 bg-transparent border-none outline-none py-4 text-lg placeholder:text-black/30 font-medium"
-            autoFocus
-          />
-          <button type="submit" className="bg-lex-black text-white px-8 py-4 rounded-full font-bold hover:bg-black/90 transition-colors">
+          <button type="submit" className="w-full md:w-auto bg-lex-black text-white px-8 py-3 md:py-4 rounded-xl md:rounded-full font-bold hover:bg-black/90 transition-colors">
             Cari
           </button>
         </form>

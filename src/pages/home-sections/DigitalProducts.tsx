@@ -1,27 +1,63 @@
 import { motion } from "framer-motion";
-import { Gamepad2, Wifi, Zap, Smartphone, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Gamepad2, ArrowRight, Laptop, Wrench, Coffee, ShoppingBag, Dog, Scissors, Compass } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 export function DigitalProducts() {
+  const navigate = useNavigate();
+
+  const categories = [
+    { icon: <Laptop className="w-5 h-5 text-white" />, label: "Technology", color: "bg-blue-500", tab: "technology" },
+    { icon: <Wrench className="w-5 h-5 text-white" />, label: "Services", color: "bg-orange-500", tab: "services" },
+    { icon: <Coffee className="w-5 h-5 text-white" />, label: "Food", color: "bg-amber-600", tab: "food" },
+    { icon: <ShoppingBag className="w-5 h-5 text-white" />, label: "Products", color: "bg-pink-500", tab: "products" },
+    { icon: <Gamepad2 className="w-5 h-5 text-white" />, label: "Digital", color: "bg-purple-600", tab: "digital" },
+    { icon: <Dog className="w-5 h-5 text-white" />, label: "Pets", color: "bg-lime-500", tab: "products" },
+    { icon: <Scissors className="w-5 h-5 text-white" />, label: "Lifestyle", color: "bg-rose-500", tab: "services" },
+    { icon: <Compass className="w-5 h-5 text-white" />, label: "Explore All", color: "bg-lex-black", tab: "all" },
+  ];
+
   return (
-    <section className="py-32 px-4 bg-lex-purple text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-lex-purple-start to-lex-purple-end opacity-50 z-0" />
+    <section className="py-12 md:py-32 px-4 bg-white md:bg-lex-purple md:text-white relative overflow-hidden">
+      <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-gradient-to-br from-lex-purple-start to-lex-purple-end opacity-50 z-0" />
       
-      <div className="relative z-10 mx-auto max-w-7xl flex flex-col lg:flex-row gap-16 items-center">
-        <div className="flex-1">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6">
-            Digital stuff.<br />Instantly delivered.
+      <div className="relative z-10 mx-auto max-w-7xl flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
+        
+        {/* Mobile-only PLISSPA style Grid */}
+        <div className="md:hidden w-full px-2 mt-4">
+          <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+            {categories.map((item, idx) => (
+              <div 
+                key={idx} 
+                onClick={() => navigate(`/explore?tab=${item.tab}`)}
+                className="flex flex-col items-center gap-2 cursor-pointer transition-transform active:scale-95 group"
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm relative overflow-hidden group-hover:shadow-md transition-shadow`}>
+                  <div className={`absolute inset-0 opacity-20 ${item.color}`}></div>
+                  <div className={`relative z-10 w-9 h-9 ${item.color} rounded-full flex items-center justify-center shadow-inner`}>
+                    {item.icon}
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold text-center leading-tight px-1 text-gray-700">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Title / Description */}
+        <div className="flex-1 max-md:text-center mt-8 md:mt-0 max-md:px-4">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4 md:mb-6 text-lex-black md:text-white">
+            Digital stuff.<br className="hidden md:block" />Instantly delivered.
           </h2>
-          <p className="text-xl md:text-2xl text-white/80 font-medium max-w-lg mb-10">
+          <p className="text-base md:text-2xl text-black/60 md:text-white/80 font-medium max-w-lg mb-8 md:mb-10">
             Game Top Up, Pulsa, Paket Data, PLN, E-Wallet, Voucher, and Digital subscriptions.
           </p>
-          <Link to="/digital" className="inline-block bg-white text-lex-purple px-8 py-4 rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <Link to="/digital" className="inline-block bg-lex-black md:bg-white text-white md:text-lex-purple px-8 py-4 rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
             Explore Digital
           </Link>
         </div>
         
-        {/* Quick Transaction Concept Floating UI */}
-        <div className="flex-1 relative w-full max-w-lg h-[500px]">
+        {/* Desktop Quick Transaction Concept Floating UI */}
+        <div className="hidden md:block flex-1 relative w-full max-w-lg h-[500px]">
           {/* Card 1: Choose Product */}
           <motion.div 
             initial={{ opacity: 0, y: 20, rotate: -5 }}

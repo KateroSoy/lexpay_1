@@ -22,7 +22,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
+        "hidden md:block fixed top-0 z-50 w-full transition-all duration-300",
         scrolled ? "py-4" : "py-6"
       )}
     >
