@@ -6,24 +6,36 @@
   --color-lex-black: #0A0A0A;
   --color-lex-white: #FFFFFF;
   --color-lex-soft: #F6F6F4;
-  --color-lex-purple: #6E38FF;
-  --color-lex-purple-start: #5632FF;
-  --color-lex-purple-end: #A85BFF;
+  
+  /* PLISSPA Purples */
+  --color-lex-purple: #5927E5; 
+  --color-lex-purple-dark: #401BBA;
+  --color-lex-purple-light: #7B4FFF;
+  --color-lex-purple-gradient-start: #6333FF;
+  --color-lex-purple-gradient-end: #4B1EE3;
+
   --color-lex-yellow: #FFD21C;
 
-  --color-brand-ac: #8CD6F5; /* Ice blue */
-  --color-brand-network: #1E3A8A; /* Deep blue */
-  --color-brand-comp: #8B5CF6; /* Electric violet */
-  --color-brand-barber: #F59E0B; /* Warm amber */
-  --color-brand-coffee: #78350F; /* Mocha brown */
-  --color-brand-pet: #FDE047; /* Bright yellow */
+  --color-brand-ac: #8CD6F5;
+  --color-brand-network: #1E3A8A;
+  --color-brand-comp: #8B5CF6;
+  --color-brand-barber: #F59E0B;
+  --color-brand-coffee: #78350F;
+  --color-brand-pet: #FDE047;
 
   --radius-full: 9999px;
-  --radius-xl: 1.25rem; /* 20px */
-  --radius-2xl: 1.5rem; /* 24px */
-  --radius-3xl: 2rem; /* 32px */
-  --radius-4xl: 2.5rem; /* 40px */
-  --radius-5xl: 3rem; /* 48px */
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-4xl: 2.5rem;
+  --radius-5xl: 3rem;
+
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
 }
 
 @layer base {
