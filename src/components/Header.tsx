@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { PiMagnifyingGlass, PiList, PiTote, PiUser, PiSun, PiMoon } from "react-icons/pi";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,8 +9,12 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const cartItemCount = useCartStore((state) => state.getItemCount());
   const { theme, toggleTheme } = useThemeStore();
+
+  const isHome = location.pathname === "/";
+  const forceWhite = isHome && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +27,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        "hidden md:block fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "py-4" : "py-6"
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        scrolled ? "py-2 md:py-4" : "py-4 md:py-6"
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,45 +42,45 @@ export function Header() {
         >
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-black tracking-tight text-text-primary">
+            <span className={cn("text-xl font-black tracking-tight", forceWhite ? "text-white" : "text-text-primary")}>
               LEXPAY
             </span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link to="/explore" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">Explore</Link>
-            <Link to="/products" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">Products</Link>
-            <Link to="/services" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">Services</Link>
-            <Link to="/digital" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">Digital</Link>
-            <Link to="/business" className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">Business</Link>
+            <Link to="/explore" className={cn("text-sm font-medium transition-colors", forceWhite ? "text-white/80 hover:text-white" : "text-text-secondary hover:text-text-primary")}>Explore</Link>
+            <Link to="/products" className={cn("text-sm font-medium transition-colors", forceWhite ? "text-white/80 hover:text-white" : "text-text-secondary hover:text-text-primary")}>Products</Link>
+            <Link to="/services" className={cn("text-sm font-medium transition-colors", forceWhite ? "text-white/80 hover:text-white" : "text-text-secondary hover:text-text-primary")}>Services</Link>
+            <Link to="/digital" className={cn("text-sm font-medium transition-colors", forceWhite ? "text-white/80 hover:text-white" : "text-text-secondary hover:text-text-primary")}>Digital</Link>
+            <Link to="/business" className={cn("text-sm font-medium transition-colors", forceWhite ? "text-white/80 hover:text-white" : "text-text-secondary hover:text-text-primary")}>Business</Link>
           </nav>
 
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-4">
             <button 
               onClick={toggleTheme} 
-              className="flex h-10 w-10 items-center justify-center rounded-[14px] bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
+              className={cn("flex h-10 w-10 items-center justify-center rounded-[14px] transition-all hover:scale-105 active:scale-95", forceWhite ? "bg-white/10 hover:bg-white/20" : "bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20")}
             >
               {theme === 'dark' ? (
                 <PiSun className="h-5 w-5 text-white" strokeWidth={1.5} />
               ) : (
-                <PiMoon className="h-5 w-5 text-black" strokeWidth={1.5} />
+                <PiMoon className={cn("h-5 w-5", forceWhite ? "text-white" : "text-black")} strokeWidth={1.5} />
               )}
             </button>
-            <Link to="/search" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <PiMagnifyingGlass className="h-5 w-5 text-text-primary" strokeWidth={2} />
+            <Link to="/search" className={cn("flex h-10 w-10 items-center justify-center rounded-full transition-colors", forceWhite ? "hover:bg-white/10" : "hover:bg-black/5 dark:hover:bg-white/10")}>
+              <PiMagnifyingGlass className={cn("h-5 w-5", forceWhite ? "text-white" : "text-text-primary")} strokeWidth={2} />
             </Link>
-            <Link to="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <PiTote className="h-5 w-5 text-text-primary" strokeWidth={2} />
+            <Link to="/cart" className={cn("relative flex h-10 w-10 items-center justify-center rounded-full transition-colors", forceWhite ? "hover:bg-white/10" : "hover:bg-black/5 dark:hover:bg-white/10")}>
+              <PiTote className={cn("h-5 w-5", forceWhite ? "text-white" : "text-text-primary")} strokeWidth={2} />
               {cartItemCount > 0 && (
                 <span className="absolute top-0 right-0 w-4 h-4 bg-lex-purple text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-bg-main">
                   {cartItemCount}
                 </span>
               )}
             </Link>
-            <Link to="/account" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <PiUser className="h-5 w-5 text-text-primary" strokeWidth={2} />
+            <Link to="/account" className={cn("flex h-10 w-10 items-center justify-center rounded-full transition-colors", forceWhite ? "hover:bg-white/10" : "hover:bg-black/5 dark:hover:bg-white/10")}>
+              <PiUser className={cn("h-5 w-5", forceWhite ? "text-white" : "text-text-primary")} strokeWidth={2} />
             </Link>
             <button className="bg-btn-bg text-btn-text px-6 py-2.5 rounded-full text-sm font-medium hover:bg-white/80 hover:scale-105 active:scale-95 transition-all">
               Mulai
@@ -87,22 +91,22 @@ export function Header() {
           <div className="md:hidden flex items-center gap-2">
             <button 
               onClick={toggleTheme} 
-              className="flex h-10 w-10 items-center justify-center rounded-[14px] bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
+              className={cn("flex h-10 w-10 items-center justify-center rounded-[14px] transition-all hover:scale-105 active:scale-95", forceWhite ? "bg-white/10 hover:bg-white/20" : "bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20")}
             >
               {theme === 'dark' ? (
                 <PiSun className="h-5 w-5 text-white" strokeWidth={1.5} />
               ) : (
-                <PiMoon className="h-5 w-5 text-black" strokeWidth={1.5} />
+                <PiMoon className={cn("h-5 w-5", forceWhite ? "text-white" : "text-black")} strokeWidth={1.5} />
               )}
             </button>
-            <Link to="/search" className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <PiMagnifyingGlass className="h-5 w-5 text-text-primary" strokeWidth={2} />
+            <Link to="/search" className={cn("flex h-10 w-10 items-center justify-center rounded-full transition-colors", forceWhite ? "hover:bg-white/10" : "hover:bg-black/5 dark:hover:bg-white/10")}>
+              <PiMagnifyingGlass className={cn("h-5 w-5", forceWhite ? "text-white" : "text-text-primary")} strokeWidth={2} />
             </Link>
             <button 
-              className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+              className={cn("flex h-10 w-10 items-center justify-center rounded-full transition-colors", forceWhite ? "hover:bg-white/10" : "hover:bg-black/5 dark:hover:bg-white/10")}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <PiList className="h-6 w-6 text-text-primary" strokeWidth={2} />
+              <PiList className={cn("h-6 w-6", forceWhite ? "text-white" : "text-text-primary")} strokeWidth={2} />
             </button>
           </div>
         </div>

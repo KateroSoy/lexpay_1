@@ -27,12 +27,13 @@ export function Layout() {
   const navItems = [
     { name: "Home", path: "/", icon: PiHouse },
     { name: "Explore", path: "/explore", icon: PiCompass },
+    { name: "Cart", path: "/cart", icon: PiTote, badge: cartItemCount },
     { name: "Orders", path: "/orders", icon: PiPackage },
     { name: "Account", path: "/account", icon: PiUser },
   ];
 
   return (
-    <div className="flex min-h-screen flex-col bg-transparent text-text-primary pb-20 md:pb-0">
+    <div className="flex min-h-screen flex-col bg-transparent text-text-primary pb-24 md:pb-0">
       <Toaster 
         position="top-center" 
         toastOptions={{
@@ -56,30 +57,12 @@ export function Layout() {
       </main>
       <Footer />
       
-      {/* Mobile Bottom Navigation - PLISSPA Style */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-bg-card border-t border-border-main px-2 py-2 z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-around relative">
-          
-          <NavItem item={navItems[0]} location={location} />
-          <NavItem item={navItems[1]} location={location} />
-          
-          {/* Center Floating Button */}
-          <div className="relative -top-6 flex justify-center w-16">
-            <Link 
-              to="/cart" 
-              className="relative w-14 h-14 bg-lex-purple rounded-full flex items-center justify-center border-[6px] border-bg-card shadow-md text-white transition-transform active:scale-95"
-            >
-              <PiTote className="w-6 h-6" fill="none" strokeWidth={2.5} />
-              {cartItemCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-bg-card">
-                  {cartItemCount}
-                </span>
-              )}
-            </Link>
-          </div>
-
-          <NavItem item={navItems[2]} location={location} />
-          <NavItem item={navItems[3]} location={location} />
+      {/* Mobile Bottom Navigation - Modern Expanding Pill Style */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full bg-bg-card border-t border-border-main px-4 py-3 z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+        <div className="flex items-center justify-between">
+          {navItems.map((item, idx) => (
+             <NavItem key={idx} item={item} location={location} />
+          ))}
         </div>
       </div>
     </div>
@@ -94,12 +77,35 @@ function NavItem({ item, location }: { item: any, location: any }) {
     <Link 
       to={item.path}
       className={cn(
-        "flex flex-col items-center gap-1 min-w-[48px] transition-colors",
-        isActive ? "text-lex-purple" : "opacity-60 text-text-secondary hover:text-white/70"
+        "flex items-center justify-center gap-2 h-12 transition-all duration-300 relative",
+        isActive 
+          ? "bg-lex-purple text-white px-5 rounded-full" 
+          : "text-text-secondary w-12 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
       )}
     >
-      <item.icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />
-      <span className="text-[10px] font-bold tracking-tight">{item.name}</span>
+      <item.icon className="w-6 h-6 shrink-0" strokeWidth={isActive ? 2.5 : 2} />
+      
+      {/* Expanding text container */}
+      <div 
+        className={cn(
+          "overflow-hidden transition-all duration-300 whitespace-nowrap flex items-center",
+          isActive ? "max-w-[100px] opacity-100" : "max-w-0 opacity-0"
+        )}
+      >
+        <span className="text-sm font-bold">{item.name}</span>
+        
+        {/* Active Cart Badge */}
+        {item.badge !== undefined && item.badge > 0 && (
+          <span className="ml-2 bg-white text-lex-purple text-[10px] font-black px-1.5 py-0.5 rounded-full">
+            {item.badge}
+          </span>
+        )}
+      </div>
+
+      {/* Inactive Cart Badge (Dot) */}
+      {!isActive && item.badge !== undefined && item.badge > 0 && (
+        <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-bg-card" />
+      )}
     </Link>
   );
 }

@@ -1,19 +1,30 @@
 import { motion } from "framer-motion";
-import { PiGameController, PiArrowRight, PiDeviceMobile, PiWifiHigh, PiWallet, PiLightning, PiTicket, PiReceipt, PiSquaresFour } from "react-icons/pi";
+import { 
+  PiDesktopThin, 
+  PiWrenchThin, 
+  PiScissorsThin, 
+  PiCatThin, 
+  PiCoffeeThin, 
+  PiToteThin, 
+  PiGameControllerThin, 
+  PiSquaresFourThin,
+  PiArrowRight,
+  PiGameController
+} from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 
 export function DigitalProducts() {
   const navigate = useNavigate();
 
   const categories = [
-    { icon: <PiDeviceMobile className="w-7 h-7 text-blue-500" strokeWidth={1.2} />, label: "Pulsa", bg: "bg-blue-50/80", border: "border-blue-100", tab: "pulsa" },
-    { icon: <PiWifiHigh className="w-7 h-7 text-indigo-500" strokeWidth={1.2} />, label: "Paket Data", bg: "bg-indigo-50/80", border: "border-indigo-100", tab: "data" },
-    { icon: <PiWallet className="w-7 h-7 text-purple-500" strokeWidth={1.2} />, label: "E-Wallet", bg: "bg-purple-50/80", border: "border-purple-100", tab: "ewallet" },
-    { icon: <PiLightning className="w-7 h-7 text-amber-500" strokeWidth={1.2} />, label: "Token PLN", bg: "bg-amber-50/80", border: "border-amber-100", tab: "pln" },
-    { icon: <PiTicket className="w-7 h-7 text-rose-500" strokeWidth={1.2} />, label: "Voucher", bg: "bg-rose-50/80", border: "border-rose-100", tab: "voucher" },
-    { icon: <PiGameController className="w-7 h-7 text-lime-600" strokeWidth={1.2} />, label: "Game", bg: "bg-lime-50/80", border: "border-lime-100", tab: "game" },
-    { icon: <PiReceipt className="w-7 h-7 text-sky-500" strokeWidth={1.2} />, label: "Pascabayar", bg: "bg-sky-50/80", border: "border-sky-100", tab: "pascabayar" },
-    { icon: <PiSquaresFour className="w-7 h-7 text-slate-500" strokeWidth={1.2} />, label: "Lainnya", bg: "bg-slate-50/80", border: "border-slate-100", tab: "lainnya" },
+    { icon: <PiDesktopThin className="w-8 h-8 text-text-primary" />, label: "Tech", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "technology" },
+    { icon: <PiWrenchThin className="w-8 h-8 text-text-primary" />, label: "Home Serv.", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "services" },
+    { icon: <PiScissorsThin className="w-8 h-8 text-text-primary" />, label: "Lifestyle", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "services" },
+    { icon: <PiCatThin className="w-8 h-8 text-text-primary" />, label: "Pets", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "pets" },
+    { icon: <PiCoffeeThin className="w-8 h-8 text-text-primary" />, label: "Food", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "food" },
+    { icon: <PiToteThin className="w-8 h-8 text-text-primary" />, label: "Shopping", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "products" },
+    { icon: <PiGameControllerThin className="w-8 h-8 text-text-primary" />, label: "Digital", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "digital" },
+    { icon: <PiSquaresFourThin className="w-8 h-8 text-text-primary" />, label: "Lainnya", bg: "bg-black/[0.03] dark:bg-white/[0.05]", border: "border border-black/5 dark:border-white/10", tab: "all" },
   ];
 
   return (
@@ -31,12 +42,12 @@ export function DigitalProducts() {
                 onClick={() => navigate(`/explore?tab=${item.tab}`)}
                 className="flex flex-col items-center gap-2 cursor-pointer group"
               >
-                <div className={`w-[60px] h-[60px] rounded-[22px] ${item.bg} flex items-center justify-center relative overflow-hidden group-active:scale-95 transition-transform duration-300 border ${item.border}`}>
+                <div className={`w-[60px] h-[60px] rounded-[22px] ${item.bg} flex items-center justify-center relative overflow-hidden group-active:scale-95 transition-all duration-300 ${item.border} hover:bg-black/5 dark:hover:bg-white/10`}>
                   <div className="relative z-10 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                 </div>
-                <span className="text-[11px] font-semibold text-center leading-tight px-1 text-text-primary">{item.label}</span>
+                <span className="text-[11px] font-semibold text-center leading-tight px-1 text-text-primary opacity-80">{item.label}</span>
               </div>
             ))}
           </div>
