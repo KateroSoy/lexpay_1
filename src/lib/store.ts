@@ -99,3 +99,23 @@ export const useUserStore = create<UserState>()(
     }
   )
 );
+
+export type ThemeType = 'light' | 'dark';
+
+interface ThemeState {
+  theme: ThemeType;
+  toggleTheme: () => void;
+}
+
+export const useThemeStore = create<ThemeState>()(
+  persist(
+    (set) => ({
+      theme: 'dark', // Default to dark as requested previously
+      toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+    }),
+    {
+      name: 'lex-theme-storage',
+    }
+  )
+);
+

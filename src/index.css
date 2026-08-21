@@ -1,17 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   
   --color-lex-black: #0A0A0A;
   --color-lex-white: #FFFFFF;
   --color-lex-soft: #F6F6F4;
-  --color-lex-purple: #6E38FF;
+  --color-lex-purple: #5927E5; 
   --color-lex-purple-start: #5632FF;
   --color-lex-purple-end: #A85BFF;
   
   /* Mobile UI Redesign Colors */
-  --color-lex-purple: #5927E5; 
   --color-lex-purple-dark: #401BBA;
   --color-lex-purple-light: #7B4FFF;
   --color-lex-purple-gradient-start: #6333FF;
@@ -26,6 +25,15 @@
   --color-brand-coffee: #78350F; /* Mocha brown */
   --color-brand-pet: #FDE047; /* Bright yellow */
 
+  /* Dynamic Theme Variables */
+  --color-bg-main: var(--bg-main);
+  --color-bg-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-main: var(--border-color);
+  --color-btn-bg: var(--btn-bg);
+  --color-btn-text: var(--btn-text);
+
   --radius-full: 9999px;
   --radius-xl: 1.25rem; /* 20px */
   --radius-2xl: 1.5rem; /* 24px */
@@ -35,9 +43,29 @@
 }
 
 @layer base {
+  :root {
+    --bg-main: #FFFFFF;
+    --bg-card: #F6F6F4;
+    --text-primary: #0A0A0A;
+    --text-secondary: rgba(0,0,0,0.6);
+    --border-color: rgba(0,0,0,0.05);
+    --btn-bg: #0A0A0A;
+    --btn-text: #FFFFFF;
+  }
+  
+  .dark {
+    --bg-main: #09090b;
+    --bg-card: #18181b;
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255,255,255,0.6);
+    --border-color: rgba(255,255,255,0.1);
+    --btn-bg: #FFFFFF;
+    --btn-text: #000000;
+  }
+
   body {
-    background-color: var(--color-lex-white);
-    color: var(--color-lex-black);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

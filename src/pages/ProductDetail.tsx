@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { mockProducts } from "../data/mockData";
-import { ArrowLeft, Star, Truck } from "lucide-react";
+import { PiArrowLeft, PiStarFill, PiTruck } from "react-icons/pi";
 import { useState } from "react";
 import { useCartStore } from "../lib/store";
 import toast from "react-hot-toast";
@@ -27,39 +27,39 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="pt-24 pb-24 bg-white min-h-screen">
+    <div className="pt-24 pb-24 bg-bg-card min-h-screen">
       <div className="mx-auto max-w-7xl px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm font-semibold text-black/40 mb-8">
-          <Link to="/explore" className="hover:text-black flex items-center gap-1"><ArrowLeft className="w-4 h-4"/> Back to Explore</Link>
+        <div className="flex items-center gap-2 text-sm font-semibold opacity-60 text-text-secondary mb-8">
+          <Link to="/explore" className="hover:text-text-primary flex items-center gap-1"><PiArrowLeft className="w-4 h-4"/> Back to Explore</Link>
           <span>/</span>
           <span>{product.category}</span>
           <span>/</span>
-          <span className="text-black">{product.name}</span>
+          <span className="text-text-primary">{product.name}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Gallery */}
           <div className="space-y-4">
-            <div className="aspect-[4/3] bg-lex-soft rounded-[40px] overflow-hidden flex items-center justify-center p-12">
-               <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply" />
+            <div className="aspect-[4/3] bg-bg-main rounded-[40px] overflow-hidden flex items-center justify-center p-12">
+               <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
             </div>
             {/* Thumbs would go here */}
           </div>
 
           {/* Info */}
           <div className="flex flex-col justify-center">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-black/5 text-black/60 font-bold text-sm w-fit mb-4">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-text-secondary font-bold text-sm w-fit mb-4">
               {product.brand}
             </div>
             <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-4">{product.name}</h1>
             
             <div className="flex items-center gap-4 mb-8">
               <div className="flex items-center gap-1 text-lex-purple font-bold">
-                <Star className="w-5 h-5 fill-current" /> {product.rating}
+                <PiStarFill className="w-5 h-5 fill-current" /> {product.rating}
               </div>
-              <span className="text-black/30">•</span>
-              <span className="text-black/60 font-medium">{product.reviewCount} Reviews</span>
+              <span className="text-white/30">•</span>
+              <span className="text-text-secondary font-medium">{product.reviewCount} Reviews</span>
             </div>
 
             <div className="text-4xl font-black mb-8">Rp{product.price.toLocaleString('id-ID')}</div>
@@ -73,7 +73,7 @@ export default function ProductDetail() {
                     <button 
                       key={i} 
                       onClick={() => setSelectedVariant(v)}
-                      className={`px-6 py-3 rounded-full font-semibold border ${selectedVariant === v ? 'border-lex-black bg-lex-black text-white' : 'border-black/10 bg-white text-black hover:border-black/30'}`}
+                      className={`px-6 py-3 rounded-full font-semibold border ${selectedVariant === v ? 'border-white bg-btn-bg text-btn-text' : 'border-white/20 bg-bg-card text-white hover:border-white/50'}`}
                     >
                       {v}
                     </button>
@@ -84,24 +84,24 @@ export default function ProductDetail() {
 
             {/* Qty & Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <div className="flex items-center justify-between border border-black/10 rounded-full px-6 py-4 w-full sm:w-40">
-                <button onClick={() => setQty(Math.max(1, qty-1))} className="text-black/40 hover:text-black font-bold text-xl">-</button>
+              <div className="flex items-center justify-between border border-white/20 rounded-full px-6 py-4 w-full sm:w-40">
+                <button onClick={() => setQty(Math.max(1, qty-1))} className="opacity-60 text-text-secondary hover:text-text-primary font-bold text-xl">-</button>
                 <span className="font-bold text-lg">{qty}</span>
-                <button onClick={() => setQty(qty+1)} className="text-black/40 hover:text-black font-bold text-xl">+</button>
+                <button onClick={() => setQty(qty+1)} className="opacity-60 text-text-secondary hover:text-text-primary font-bold text-xl">+</button>
               </div>
-              <button onClick={handleAddToCart} className="flex-1 bg-lex-black text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-black/90 active:scale-95 transition-all cursor-pointer">
+              <button onClick={handleAddToCart} className="flex-1 bg-btn-bg text-btn-text px-8 py-4 rounded-full font-bold text-lg hover:bg-white/80 active:scale-95 transition-all cursor-pointer">
                 Tambah ke Keranjang
               </button>
             </div>
 
             {/* Fulfillment */}
-            <div className="bg-lex-soft rounded-3xl p-6 flex items-start gap-4">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0">
-                <Truck className="w-5 h-5 text-lex-black" />
+            <div className="bg-bg-main rounded-3xl p-6 flex items-start gap-4">
+              <div className="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center shrink-0">
+                <PiTruck className="w-5 h-5 text-text-primary" />
               </div>
               <div>
                 <div className="font-bold mb-1">Pengiriman Reguler</div>
-                <div className="text-black/60 font-medium text-sm">Estimasi tiba dalam 1-3 hari kerja.</div>
+                <div className="text-text-secondary font-medium text-sm">Estimasi tiba dalam 1-3 hari kerja.</div>
               </div>
             </div>
           </div>

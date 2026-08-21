@@ -2,27 +2,53 @@ import { useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { Home, Compass, Package, User, Search } from "lucide-react";
+import { PiHouse, PiCompass, PiPackage, PiUser, PiMagnifyingGlass } from "react-icons/pi";
 import { cn } from "../lib/utils";
 import { Toaster } from "react-hot-toast";
+import { useThemeStore } from "../lib/store";
 
 export function Layout() {
   const location = useLocation();
+  const theme = useThemeStore((state) => state.theme);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   const navItems = [
-    { name: "Home", path: "/", icon: Home },
-    { name: "Explore", path: "/explore", icon: Compass },
-    { name: "Orders", path: "/orders", icon: Package },
-    { name: "Account", path: "/account", icon: User },
+    { name: "Home", path: "/", icon: PiHouse },
+    { name: "Explore", path: "/explore", icon: PiCompass },
+    { name: "Orders", path: "/orders", icon: PiPackage },
+    { name: "Account", path: "/account", icon: PiUser },
   ];
 
   return (
-    <div className="flex min-h-screen flex-col bg-lex-white text-lex-black pb-20 md:pb-0">
-      <Toaster position="bottom-center" />
+    <div className="flex min-h-screen flex-col bg-transparent text-text-primary pb-20 md:pb-0">
+      <Toaster 
+        position="top-center" 
+        toastOptions={{
+          className: '',
+          style: {
+            background: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '100px',
+            padding: '8px 16px',
+            fontSize: '13px',
+            fontWeight: '600',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            marginTop: '16px'
+          },
+        }}
+      />
       <Header />
       <main className="flex-1">
         <Outlet />
@@ -30,7 +56,7 @@ export function Layout() {
       <Footer />
       
       {/* Mobile Bottom Navigation - PLISSPA Style */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-black/5 px-2 py-2 z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+      <div className="md:hidden fixed bottom-0 left-0 w-full bg-bg-card border-t border-border-main px-2 py-2 z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
         <div className="flex items-center justify-around relative">
           
           <NavItem item={navItems[0]} location={location} />
@@ -40,9 +66,9 @@ export function Layout() {
           <div className="relative -top-6 flex justify-center w-16">
             <Link 
               to="/search" 
-              className="w-14 h-14 bg-lex-purple rounded-full flex items-center justify-center border-[6px] border-white shadow-md text-white transition-transform active:scale-95"
+              className="w-14 h-14 bg-lex-purple rounded-full flex items-center justify-center border-[6px] border-white shadow-md text-text-primary transition-transform active:scale-95"
             >
-              <Search className="w-5 h-5" fill="none" strokeWidth={2.5} />
+              <PiMagnifyingGlass className="w-5 h-5" fill="none" strokeWidth={2.5} />
             </Link>
           </div>
 
@@ -63,7 +89,7 @@ function NavItem({ item, location }: { item: any, location: any }) {
       to={item.path}
       className={cn(
         "flex flex-col items-center gap-1 min-w-[48px] transition-colors",
-        isActive ? "text-lex-purple" : "text-black/40 hover:text-black/70"
+        isActive ? "text-lex-purple" : "opacity-60 text-text-secondary hover:text-white/70"
       )}
     >
       <item.icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />

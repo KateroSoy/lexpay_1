@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { PiMagnifyingGlass } from "react-icons/pi";
 import { mockProducts, mockServices, mockDigital } from "../data/mockData";
 import { Link, useLocation } from "react-router-dom";
 import { useCartStore } from "../lib/store";
@@ -19,18 +19,18 @@ export default function Explore() {
   }, [location.pathname]);
 
   return (
-    <div className="pt-32 pb-24 px-4 bg-lex-soft min-h-screen">
+    <div className="pt-32 pb-24 px-4 bg-bg-main min-h-screen">
       <div className="mx-auto max-w-7xl">
-        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-lex-black mb-8">
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-text-primary mb-8">
           Explore Ecosystem
         </h1>
         
         {/* Search */}
-        <Link to="/search" className="bg-white p-2 rounded-full shadow-sm flex items-center gap-4 border border-black/5 mb-12 cursor-text hover:border-black/20 transition-colors">
+        <Link to="/search" className="bg-bg-card p-2 rounded-full shadow-sm flex items-center gap-4 border border-border-main mb-12 cursor-text hover:border-white/30 transition-colors">
           <div className="pl-6">
-            <Search className="w-5 h-5 text-black/40" />
+            <PiMagnifyingGlass className="w-5 h-5 opacity-60 text-text-secondary" />
           </div>
-          <div className="flex-1 py-3 text-black/40 font-medium text-left">
+          <div className="flex-1 py-3 opacity-60 text-text-secondary font-medium text-left">
             Cari produk, layanan, atau digital...
           </div>
         </Link>
@@ -43,8 +43,8 @@ export default function Explore() {
               onClick={() => setActiveTab(cat.toLowerCase())}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap transition-colors ${
                 activeTab === cat.toLowerCase() 
-                  ? "bg-lex-black text-white" 
-                  : "bg-white text-black/60 hover:bg-black/5"
+                  ? "bg-btn-bg text-btn-text" 
+                  : "bg-bg-card text-text-secondary hover:bg-white/10"
               }`}
             >
               {cat}
@@ -59,22 +59,22 @@ export default function Explore() {
                 <h2 className="text-3xl font-bold mb-6">Popular Services</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {mockServices.map(service => (
-                    <Link to={`/services/${service.slug}`} key={service.id} className="bg-white rounded-[32px] overflow-hidden group hover:shadow-xl transition-shadow cursor-pointer block border border-black/5">
-                      <div className="aspect-[4/3] bg-gray-100 overflow-hidden relative">
+                    <Link to={`/services/${service.slug}`} key={service.id} className="bg-bg-card rounded-[32px] overflow-hidden group hover:shadow-xl transition-shadow cursor-pointer block border border-border-main">
+                      <div className="aspect-[4/3] bg-white/10 overflow-hidden relative">
                          <img src={service.image} alt={service.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
+                         <div className="absolute top-4 left-4 bg-bg-card/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
                            {service.provider}
                          </div>
                       </div>
                       <div className="p-6">
                         <h3 className="text-xl font-bold mb-2 group-hover:text-lex-purple transition-colors">{service.name}</h3>
-                        <p className="text-black/60 font-medium text-sm line-clamp-2 mb-4">{service.description}</p>
+                        <p className="text-text-secondary font-medium text-sm line-clamp-2 mb-4">{service.description}</p>
                         <div className="flex items-end justify-between">
                           <div>
-                            <div className="text-xs text-black/40 font-bold uppercase tracking-wider">Mulai dari</div>
+                            <div className="text-xs opacity-60 text-text-secondary font-bold uppercase tracking-wider">Mulai dari</div>
                             <div className="font-bold text-lg">Rp{service.startingPrice.toLocaleString('id-ID')}</div>
                           </div>
-                          <span className="bg-black/5 px-3 py-1 rounded-full text-xs font-bold text-black/60">{service.duration}</span>
+                          <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-text-secondary">{service.duration}</span>
                         </div>
                       </div>
                     </Link>
@@ -87,16 +87,18 @@ export default function Explore() {
           {(activeTab === "all" || activeTab === "products" || activeTab === "food") && (
              <div>
                 <h2 className="text-3xl font-bold mb-6">Physical Products</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
                   {mockProducts.map(product => (
-                    <Link to={`/products/${product.slug}`} key={product.id} className="bg-white rounded-[24px] overflow-hidden group hover:shadow-lg transition-shadow cursor-pointer block border border-black/5">
-                      <div className="aspect-square bg-gray-50 overflow-hidden relative p-6">
-                         <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
+                    <Link to={`/products/${product.slug}`} key={product.id} className="bg-bg-card rounded-[20px] md:rounded-[24px] overflow-hidden group hover:shadow-lg transition-shadow cursor-pointer block border border-border-main flex flex-col h-full">
+                      <div className="aspect-square bg-white/5 overflow-hidden relative p-4 md:p-6">
+                         <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                       </div>
-                      <div className="p-5">
-                        <div className="text-xs text-black/40 font-bold uppercase tracking-wider mb-1">{product.brand}</div>
-                        <h3 className="font-bold mb-2 group-hover:text-lex-purple transition-colors line-clamp-2 text-sm md:text-base">{product.name}</h3>
-                        <div className="font-black text-lg">Rp{product.price.toLocaleString('id-ID')}</div>
+                      <div className="p-3 md:p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="text-[10px] md:text-xs opacity-60 text-text-secondary font-bold uppercase tracking-wider mb-1">{product.brand}</div>
+                          <h3 className="font-bold mb-2 group-hover:text-lex-purple transition-colors line-clamp-2 text-[13px] md:text-base leading-snug">{product.name}</h3>
+                        </div>
+                        <div className="font-black text-sm md:text-lg text-lex-purple mt-2">Rp{product.price.toLocaleString('id-ID')}</div>
                       </div>
                     </Link>
                   ))}
@@ -108,16 +110,16 @@ export default function Explore() {
           {(activeTab === "all" || activeTab === "digital") && (
              <div>
                 <h2 className="text-3xl font-bold mb-6">Digital Vouchers</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   {mockDigital.map(digital => (
-                    <div key={digital.id} className="bg-white rounded-[32px] overflow-hidden group hover:shadow-lg transition-shadow cursor-pointer block border border-black/5 p-6">
+                    <div key={digital.id} className="bg-bg-card rounded-[24px] md:rounded-[32px] overflow-hidden group hover:shadow-lg transition-shadow cursor-pointer block border border-border-main p-4 md:p-6">
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-16 h-16 bg-lex-soft rounded-2xl overflow-hidden p-2">
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-bg-main rounded-2xl overflow-hidden p-2 shrink-0">
                            <img src={digital.image} alt={digital.name} className="w-full h-full object-cover rounded-xl" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-lg group-hover:text-lex-purple transition-colors">{digital.name}</h3>
-                          <div className="text-xs font-bold text-black/50 uppercase">{digital.provider}</div>
+                          <h3 className="font-bold text-base md:text-lg group-hover:text-lex-purple transition-colors">{digital.name}</h3>
+                          <div className="text-[10px] md:text-xs font-bold text-white/50 uppercase">{digital.provider}</div>
                         </div>
                       </div>
                       <div className="space-y-2 mt-6">
@@ -137,7 +139,7 @@ export default function Explore() {
                                });
                                toast.success(`${denom.name} added to cart!`);
                              }}
-                             className="w-full flex justify-between items-center p-3 rounded-xl border border-black/5 hover:border-lex-purple transition-colors cursor-pointer text-left"
+                             className="w-full flex justify-between items-center p-3 rounded-xl border border-border-main hover:border-lex-purple transition-colors cursor-pointer text-left"
                            >
                              <span className="font-semibold text-sm">{denom.name}</span>
                              <span className="font-bold">Rp{denom.price.toLocaleString('id-ID')}</span>

@@ -12,7 +12,7 @@ import { FeaturedProducts } from "./home-sections/FeaturedProducts";
 
 export default function Home() {
   return (
-    <div className="bg-lex-white">
+    <div className="bg-bg-main">
       <Hero />
       <DigitalProducts />
       <FeaturedProducts />
