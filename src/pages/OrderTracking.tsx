@@ -23,7 +23,7 @@ export default function OrderTracking() {
     { title: "Order Placed", desc: "We have received your order", active: true, time: new Date(order.date).toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'}) },
     { title: "Processing", desc: "Your order is being processed", active: true, time: "In Progress" },
     { title: "Shipped / Service Ready", desc: "On the way or technician assigned", active: order.status !== 'processing', time: "" },
-    { title: "Completed", desc: "Order has been completed", active: order.status === 'completed', time: "" }
+    { title: "Completed", desc: "Order has been completed", active: order.status === 'delivered', time: "" }
   ];
 
   return (
@@ -41,7 +41,7 @@ export default function OrderTracking() {
               <p className="text-text-secondary font-medium tracking-wide">#{order.id}</p>
             </div>
             <span className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border w-fit ${
-              order.status === 'completed' ? "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
+              order.status === 'delivered' ? "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
             }`}>
               {order.status}
             </span>

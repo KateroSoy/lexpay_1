@@ -28,13 +28,13 @@ export function DigitalProducts() {
   ];
 
   return (
-    <section className="py-12 md:py-32 px-4 bg-bg-card md:bg-lex-purple md:text-text-primary relative overflow-hidden">
+    <section className="pt-8 pb-10 md:py-32 px-4 bg-bg-card md:bg-lex-purple md:text-text-primary relative overflow-hidden">
       <div className="hidden md:block absolute top-0 right-0 w-full h-full bg-gradient-to-br from-lex-purple-start to-lex-purple-end opacity-50 z-0" />
       
       <div className="relative z-10 mx-auto max-w-7xl flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
         
         {/* Mobile-only PLISSPA style Grid */}
-        <div className="md:hidden w-full px-2 mt-4">
+        <div className="md:hidden w-full px-2 mt-2">
           <div className="grid grid-cols-4 gap-y-6 gap-x-2 mb-6">
             {categories.map((item, idx) => (
               <div 

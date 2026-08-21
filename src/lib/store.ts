@@ -110,11 +110,12 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: 'dark', // Default to dark as requested previously
+      theme: 'light', // Default to light mode
       toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
     }),
     {
       name: 'lex-theme-storage',
+      version: 2,
     }
   )
 );

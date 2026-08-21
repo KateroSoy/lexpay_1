@@ -53,7 +53,7 @@ export default function Orders() {
                     <div className="font-black text-lg sm:text-xl flex items-center gap-3">
                       {order.id}
                       <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
-                        order.status === 'completed' ? "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
+                        order.status === 'delivered' ? "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
                       }`}>
                         {order.status}
                       </span>

@@ -28,21 +28,21 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "py-2 md:py-4" : "py-4 md:py-6"
+        scrolled ? "py-1.5 md:py-3" : "py-2 md:py-4"
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div
           className={cn(
-            "flex items-center justify-between rounded-full px-6 py-3 transition-all duration-300",
+            "flex items-center justify-between rounded-full px-4 sm:px-6 py-2 transition-all duration-300",
             scrolled
-              ? "bg-bg-card/80 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] backdrop-blur-xl border border-border-main"
+              ? "bg-bg-card/85 shadow-[0_4px_20px_-6px_rgba(0,0,0,0.08)] backdrop-blur-xl border border-border-main"
               : "bg-transparent"
           )}
         >
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className={cn("text-xl font-black tracking-tight", forceWhite ? "text-white" : "text-text-primary")}>
+            <span className={cn("text-lg font-extrabold tracking-tight", forceWhite ? "text-white" : "text-text-primary")}>
               LEXPAY
             </span>
           </Link>

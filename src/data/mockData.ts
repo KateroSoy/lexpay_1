@@ -239,6 +239,44 @@ export const mockServices: Service[] = [
     ],
     rating: 4.9,
     slug: "custom-software-solutions"
+  },
+  {
+    id: "s9",
+    name: "Rakit & Servis PC Custom",
+    provider: "LEX Comp",
+    category: "Electronics",
+    description: "Jasa rakit PC gaming/workstation custom, pembersihan komponen, konsultasi spesifikasi, dan perbaikan/servis PC.",
+    startingPrice: 150000,
+    duration: "2-4 Jam",
+    image: "/a269c596-84de-46c4-9e8f-05a50e6c86e0.jfif",
+    availability: ["10:00", "13:00", "16:00"],
+    coverageArea: ["Jakarta", "Depok", "Tangerang", "Bekasi"],
+    options: [
+      { name: "Servis & Maintenance PC", price: 150000 },
+      { name: "Jasa Rakit PC Standard", price: 250000 },
+      { name: "Jasa Rakit High-End + Cable Management", price: 450000 }
+    ],
+    rating: 4.9,
+    slug: "rakit-servis-pc-custom"
+  },
+  {
+    id: "s10",
+    name: "Jasa Top Up Games Instan",
+    provider: "LEX Digital",
+    category: "Game",
+    description: "Layanan Top Up game instan untuk Mobile Legends, Free Fire, PUBG Mobile, dan Steam Wallet secara otomatis 24/7.",
+    startingPrice: 25000,
+    duration: "Instan (1-5 Menit)",
+    image: "/0845644f-e51e-4752-90ff-0d73ea89a928.jfif",
+    availability: ["24 Jam Instan"],
+    coverageArea: ["Seluruh Indonesia"],
+    options: [
+      { name: "MLBB 86 Diamonds", price: 25000 },
+      { name: "MLBB 257 Diamonds", price: 75000 },
+      { name: "Free Fire 355 Diamonds", price: 50000 }
+    ],
+    rating: 5.0,
+    slug: "jasa-topup-games-instan"
   }
 ];
 

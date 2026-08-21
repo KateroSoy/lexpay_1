@@ -36,7 +36,9 @@ export function Layout() {
     <div className="flex min-h-screen flex-col bg-transparent text-text-primary pb-24 md:pb-0">
       <Toaster 
         position="top-center" 
+        containerStyle={{ top: 75 }}
         toastOptions={{
+          duration: 1800,
           className: '',
           style: {
             background: 'var(--bg-card)',
@@ -46,8 +48,7 @@ export function Layout() {
             padding: '8px 16px',
             fontSize: '13px',
             fontWeight: '600',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            marginTop: '16px'
+            boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
           },
         }}
       />
