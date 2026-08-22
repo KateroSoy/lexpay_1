@@ -171,22 +171,49 @@ export function Dashboard() {
           {recent.length === 0 ? (
             <EmptyState title="Belum ada pesanan" />
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-sm">
+            <div>
+              {/* Mobile Card List */}
+              <div className="md:hidden flex flex-col divide-y divide-border-main">
+                {recent.map((o) => (
+                  <Link
+                    key={o.id}
+                    to={`/admin/orders/${o.id}`}
+                    className="flex flex-col gap-2 p-4 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold">{o.code}</span>
+                      <Badge tone={STATUS_TONES[o.status]}>
+                        {STATUS_LABELS[o.status]}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-text-secondary">{o.customerName}</span>
+                      <span className="font-bold tabular-nums text-text-primary">{rupiah(o.total)}</span>
+                    </div>
+                    <div className="text-[11px] text-text-secondary">
+                      {formatDate(o.createdAt)}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-x-auto pb-4">
+                <table className="w-full min-w-[520px] text-sm">
                 <thead>
                   <tr className="border-b border-border-main text-left text-[11px] uppercase tracking-wide text-text-secondary">
                     <th className="px-5 py-2.5 font-bold">Kode</th>
                     <th className="px-5 py-2.5 font-bold">Pelanggan</th>
                     <th className="px-5 py-2.5 font-bold">Tanggal</th>
                     <th className="px-5 py-2.5 text-right font-bold">Total</th>
-                    <th className="px-5 py-2.5 font-bold">Status</th>
+                    <th className="px-5 py-2.5 font-bold sticky right-0 bg-bg-card z-10 shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.05)] dark:shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.3)]">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recent.map((o) => (
                     <tr
                       key={o.id}
-                      className="border-b border-border-main last:border-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.03]"
+                      className="group border-b border-border-main last:border-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.03]"
                     >
                       <td className="px-5 py-3 font-bold">
                         <Link to={`/admin/orders/${o.id}`} className="hover:text-lex-purple">
@@ -200,7 +227,7 @@ export function Dashboard() {
                       <td className="px-5 py-3 text-right font-bold tabular-nums">
                         {rupiah(o.total)}
                       </td>
-                      <td className="px-5 py-3">
+                      <td className="px-5 py-3 sticky right-0 bg-bg-card group-hover:bg-gray-50 dark:bg-[#18181b] dark:group-hover:bg-[#1f1f23] z-10 shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.05)] dark:shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.3)]">
                         <Badge tone={STATUS_TONES[o.status]}>
                           {STATUS_LABELS[o.status]}
                         </Badge>
@@ -209,6 +236,7 @@ export function Dashboard() {
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           )}
         </Card>

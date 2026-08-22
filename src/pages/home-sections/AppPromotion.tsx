@@ -1,6 +1,6 @@
 export function AppPromotion() {
   return (
-    <section className="py-32 px-4 bg-bg-card overflow-hidden">
+    <section className="py-16 md:py-32 px-4 bg-bg-card overflow-hidden">
       <div className="mx-auto max-w-7xl flex flex-col items-center text-center">
         <h2 className="text-3xl md:text-4xl font-black tracking-tight text-text-primary mb-6">
           LEXPAY in your pocket.
@@ -53,7 +53,7 @@ export function AppPromotion() {
 
 export function FinalCTA() {
   return (
-    <section className="bg-bg-main py-40 px-4 text-center">
+    <section className="bg-bg-main py-20 md:py-40 px-4 text-center">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-6xl md:text-8xl font-black tracking-tight mb-12 leading-none text-text-primary">
           Whatever you need.<br />

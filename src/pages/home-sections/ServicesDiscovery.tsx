@@ -1,6 +1,6 @@
 export function ServicesDiscovery() {
   return (
-    <section className="py-32 px-4 bg-bg-card">
+    <section className="py-16 md:py-32 px-4 bg-bg-card">
       <div className="mx-auto max-w-7xl">
         <div className="mb-20">
           <h2 className="text-3xl md:text-4xl font-black tracking-tight text-text-primary mb-4">
@@ -13,7 +13,7 @@ export function ServicesDiscovery() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1: AC */}
-          <div className="bg-bg-main rounded-[40px] p-10 flex flex-col justify-between min-h-[480px] group relative overflow-hidden">
+          <div className="bg-bg-main rounded-[40px] p-6 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[480px] group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-ac/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10 max-w-md">
               <span className="inline-block px-4 py-1.5 rounded-full bg-brand-ac/20 text-brand-ac font-bold text-sm mb-6">LEX AC</span>
@@ -33,7 +33,7 @@ export function ServicesDiscovery() {
           </div>
 
           {/* Card 2: Network */}
-          <div className="bg-bg-card rounded-[40px] p-10 flex flex-col justify-between min-h-[480px] group relative overflow-hidden text-text-primary">
+          <div className="bg-bg-card rounded-[40px] p-6 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[480px] group relative overflow-hidden text-text-primary">
             <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-network/40 rounded-full blur-3xl translate-y-1/3 translate-x-1/3" />
             <div className="relative z-10 max-w-md">
               <span className="inline-block px-4 py-1.5 rounded-full bg-bg-card/10 text-text-primary font-bold text-sm mb-6">LEX Network</span>
@@ -46,7 +46,7 @@ export function ServicesDiscovery() {
           </div>
 
           {/* Card 3: Comp */}
-          <div className="bg-bg-card rounded-[40px] p-10 flex flex-col justify-between min-h-[480px] group relative overflow-hidden text-text-primary md:col-span-2 lg:col-span-1">
+          <div className="bg-bg-card rounded-[40px] p-6 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[480px] group relative overflow-hidden text-text-primary">
             <div className="absolute top-1/2 left-1/2 w-[120%] h-[120%] bg-brand-comp/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative z-10 max-w-md">
               <span className="inline-block px-4 py-1.5 rounded-full bg-brand-comp/20 text-brand-comp font-bold text-sm mb-6">LEX Comp</span>
@@ -59,7 +59,7 @@ export function ServicesDiscovery() {
           </div>
 
           {/* Card 4: Barber */}
-          <div className="bg-bg-main rounded-[40px] p-10 flex flex-col justify-between min-h-[480px] group relative overflow-hidden">
+          <div className="bg-bg-main rounded-[40px] p-6 md:p-10 flex flex-col justify-between min-h-[320px] md:min-h-[480px] group relative overflow-hidden">
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-barber/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
             <div className="relative z-10 max-w-md">
               <span className="inline-block px-4 py-1.5 rounded-full bg-brand-barber/20 text-brand-barber font-bold text-sm mb-6">LEX Barber</span>

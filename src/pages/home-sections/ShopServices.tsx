@@ -5,11 +5,11 @@ export function ShopServices() {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-0 px-4 md:px-0 py-8 md:py-0">
       {/* Shop Panel */}
-      <div className="bg-bg-main p-8 md:p-24 min-h-[50vh] md:min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden rounded-[32px] md:rounded-none">
+      <div className="bg-bg-main p-8 md:p-24 min-h-[35vh] md:min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden rounded-[32px] md:rounded-none">
         <div className="absolute inset-0 bg-gradient-to-br from-lex-soft to-gray-200 opacity-50" />
         <div className="relative z-10 max-w-lg">
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4 md:mb-6">Shop anything.</h2>
-          <Link to="/products" className="flex items-center justify-center md:justify-start gap-2 text-base md:text-xl font-bold bg-bg-card text-white px-6 py-3 md:px-8 md:py-4 rounded-full w-full md:w-fit group-hover:scale-105 transition-transform shadow-lg">
+          <Link to="/products" className="flex items-center justify-center md:justify-start gap-2 text-base md:text-xl font-bold bg-bg-card text-text-primary px-6 py-3 md:px-8 md:py-4 rounded-full w-full md:w-fit group-hover:scale-105 transition-transform shadow-lg">
             Explore Products <PiArrowRight className="w-5 h-5" />
           </Link>
         </div>
@@ -30,7 +30,7 @@ export function ShopServices() {
       </div>
 
       {/* Services Panel */}
-      <div className="bg-bg-card text-white p-8 md:p-24 min-h-[50vh] md:min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden rounded-[32px] md:rounded-none">
+      <div className="bg-bg-card text-white p-8 md:p-24 min-h-[35vh] md:min-h-[70vh] flex flex-col justify-between group cursor-pointer relative overflow-hidden rounded-[32px] md:rounded-none">
         <div className="absolute inset-0 bg-gradient-to-br from-lex-black to-gray-900 opacity-50" />
         <div className="relative z-10 max-w-lg">
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4 md:mb-6">Book anything.</h2>

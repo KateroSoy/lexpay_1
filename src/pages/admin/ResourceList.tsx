@@ -10,6 +10,7 @@ import {
   PiCaretDown,
   PiCaretLeft,
   PiCaretRight,
+  PiX,
 } from 'react-icons/pi';
 import { cn } from '../../lib/utils';
 import { useCmsStore, type CmsRecord } from '../../lib/cmsStore';
@@ -37,6 +38,7 @@ export function ResourceList() {
   const [sort, setSort] = useState<{ key: string; dir: 'asc' | 'desc' } | null>(null);
   const [page, setPage] = useState(0);
   const [pendingDelete, setPendingDelete] = useState<CmsRecord | null>(null);
+  const [viewDetail, setViewDetail] = useState<CmsRecord | null>(null);
 
   const filtered = useMemo(() => {
     if (!resource) return [];
@@ -159,8 +161,45 @@ export function ResourceList() {
             }
           />
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-sm">
+          <div>
+            {/* Mobile Card List */}
+            <div className="md:hidden flex flex-col divide-y divide-border-main">
+              {visible.map((row) => (
+                <div key={row.id} className="p-4 flex flex-col gap-3">
+                  <div className="font-bold">
+                    {resource.columns[0]?.render
+                      ? resource.columns[0].render(row)
+                      : String(row[resource.columns[0]?.key] ?? '—')}
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mt-2">
+                    <button
+                      onClick={() => setViewDetail(row)}
+                      className="flex-1 flex items-center justify-center rounded-lg border border-border-main bg-bg-main py-2 text-sm font-bold text-text-primary hover:bg-black/5 dark:hover:bg-white/10"
+                    >
+                      Detail
+                    </button>
+                    <Link
+                      to={`/admin/${resource.slug}/${row.id}`}
+                      className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-border-main bg-bg-main py-2 text-sm font-bold text-text-primary hover:bg-black/5 dark:hover:bg-white/10"
+                    >
+                      <PiPencilSimple className="h-4 w-4" /> Edit
+                    </Link>
+                    <button
+                      onClick={() => setPendingDelete(row)}
+                      className="grid h-[38px] w-[38px] place-items-center rounded-lg border border-red-500/20 bg-bg-main text-red-500 hover:bg-red-500/10"
+                      aria-label="Hapus"
+                    >
+                      <PiTrash className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto pb-4">
+              <table className="w-full min-w-[600px] text-sm">
               <thead>
                 <tr className="border-b border-border-main text-left text-[11px] uppercase tracking-wide text-text-secondary">
                   {resource.columns.map((col) => (
@@ -193,14 +232,14 @@ export function ResourceList() {
                       )}
                     </th>
                   ))}
-                  <th className="px-4 py-3 text-right font-bold">Aksi</th>
+                  <th className="px-4 py-3 text-right font-bold sticky right-0 bg-bg-card z-10 shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.05)] dark:shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.3)]">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {visible.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-border-main last:border-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.03]"
+                    className="group border-b border-border-main last:border-0 hover:bg-black/[0.02] dark:hover:bg-white/[0.03]"
                   >
                     {resource.columns.map((col) => (
                       <td
@@ -216,7 +255,7 @@ export function ResourceList() {
                           : String(row[col.key] ?? '—')}
                       </td>
                     ))}
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 sticky right-0 bg-bg-card group-hover:bg-gray-50 dark:bg-[#18181b] dark:group-hover:bg-[#1f1f23] z-10 shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.05)] dark:shadow-[-8px_0_16px_-4px_rgba(0,0,0,0.3)]">
                       <div className="flex items-center justify-end gap-1">
                         <Link
                           to={`/admin/${resource.slug}/${row.id}`}
@@ -238,6 +277,7 @@ export function ResourceList() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         )}
 
@@ -288,6 +328,42 @@ export function ResourceList() {
         }}
         onCancel={() => setPendingDelete(null)}
       />
+
+      {/* Mobile Detail Modal */}
+      {viewDetail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+            onClick={() => setViewDetail(null)} 
+          />
+          <div className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl bg-bg-card shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border-main bg-bg-card/90 px-5 py-4 backdrop-blur-md">
+              <h3 className="font-black text-lg">Detail {resource.singular}</h3>
+              <button 
+                onClick={() => setViewDetail(null)} 
+                className="grid h-8 w-8 place-items-center rounded-lg hover:bg-black/5 dark:hover:bg-white/10"
+              >
+                <PiX className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="p-5 flex flex-col gap-5">
+               {resource.columns.map(col => (
+                 <div key={col.key} className="flex flex-col gap-1.5">
+                   <span className="text-[11px] font-bold uppercase tracking-wide text-text-secondary">
+                     {col.label}
+                   </span>
+                   <div className="text-sm font-medium bg-bg-main p-3.5 rounded-xl border border-border-main break-words">
+                     {col.render ? col.render(viewDetail) : String(viewDetail[col.key] ?? '—')}
+                   </div>
+                 </div>
+               ))}
+               <Button onClick={() => setViewDetail(null)} className="mt-2">
+                 Tutup
+               </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

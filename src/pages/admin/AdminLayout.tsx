@@ -108,7 +108,7 @@ export function AdminLayout() {
   );
 
   return (
-    <div className="min-h-screen bg-bg-main text-text-primary">
+    <div className="min-h-screen bg-bg-main text-text-primary pb-24 lg:pb-0">
       <Toaster
         position="top-right"
         toastOptions={{
@@ -185,6 +185,13 @@ export function AdminLayout() {
         </main>
       </div>
 
+      {/* Mobile Bottom Navigation - Modern Expanding Pill Style */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-bg-card border-t border-border-main px-4 py-3 z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)] flex items-center justify-between">
+        {nav.map((item) => (
+           <AdminNavItem key={item.to} item={item} location={location} />
+        ))}
+      </div>
+
       <ConfirmDialog
         open={confirmReset}
         title="Reset data demo?"
@@ -212,4 +219,35 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
 
   if (!authed) return null;
   return <>{children}</>;
+}
+
+function AdminNavItem({ item, location }: { item: any, location: any }) {
+  const isActive = location.pathname === item.to || 
+                   (!item.end && location.pathname.startsWith(item.to));
+  
+  return (
+    <NavLink 
+      to={item.to}
+      end={item.end}
+      className={cn(
+        "flex items-center justify-center gap-1.5 h-12 transition-all duration-300 relative",
+        isActive 
+          ? "bg-lex-purple text-white px-4 rounded-full" 
+          : "text-text-secondary w-12 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
+      )}
+      title={item.label}
+    >
+      <item.icon className="w-[22px] h-[22px] shrink-0" strokeWidth={isActive ? 2.5 : 2} />
+      
+      {/* Expanding text container */}
+      <div 
+        className={cn(
+          "overflow-hidden transition-all duration-300 whitespace-nowrap flex items-center",
+          isActive ? "max-w-[75px] opacity-100" : "max-w-0 opacity-0"
+        )}
+      >
+        <span className="text-[11px] font-bold tracking-tight">{item.label}</span>
+      </div>
+    </NavLink>
+  );
 }
