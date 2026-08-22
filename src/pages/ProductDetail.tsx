@@ -1,18 +1,35 @@
 import { useParams, Link } from "react-router-dom";
-import { mockProducts } from "../data/mockData";
 import { PiArrowLeft, PiStarFill, PiTruck } from "react-icons/pi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "../lib/store";
 import toast from "react-hot-toast";
+import { lexpayApi } from "../lib/api";
+import type { Product } from "../lib/types";
 
 export default function ProductDetail() {
   const { slug } = useParams();
-  const product = mockProducts.find(p => p.slug === slug) || mockProducts[0];
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
-  const [selectedVariant, setSelectedVariant] = useState(product.variants[0] || "");
+  const [selectedVariant, setSelectedVariant] = useState("");
   const addItem = useCartStore((state) => state.addItem);
 
+  useEffect(() => {
+    if (!slug) return;
+    setLoading(true);
+    lexpayApi.product(slug)
+      .then(res => {
+        setProduct(res.data);
+        if (res.data.variants && res.data.variants.length > 0) {
+          setSelectedVariant(res.data.variants[0]);
+        }
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [slug]);
+
   const handleAddToCart = () => {
+    if (!product) return;
     addItem({
       id: `${product.id}-${selectedVariant}`,
       productId: product.id,
@@ -27,8 +44,25 @@ export default function ProductDetail() {
     toast.success(`${qty}x ${product.name} ditambahkan ke keranjang!`);
   };
 
+  if (loading) {
+    return (
+      <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-lex-purple"></div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+        <Link to="/explore" className="text-lex-purple hover:underline">Go back to Explore</Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="pt-14 md:pt-20 pb-16 bg-bg-card min-h-screen">
+    <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen">
       <div className="mx-auto max-w-6xl px-3 sm:px-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-1.5 text-[11px] md:text-xs font-semibold opacity-70 text-text-secondary mb-2 md:mb-3 truncate">

@@ -24,7 +24,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mb-4 md:mb-6 flex flex-col items-center"
         >
 
@@ -44,7 +44,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mt-4 md:mt-6 px-4"
         >
           <Link to="/explore" className="w-full sm:w-auto px-8 py-4 bg-lex-purple text-white rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all text-center shadow-lg">
@@ -57,7 +57,7 @@ export function Hero() {
           onSubmit={handleSearch}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mt-6 md:mt-10 max-md:-mb-14 relative z-20 w-[92%] max-w-2xl bg-white dark:bg-[#18181b] p-1.5 md:p-2 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-row items-center border border-black/10 dark:border-white/10 focus-within:border-lex-purple/30 transition-all mx-auto"
         >
           <div className="flex items-center justify-center pl-4 pr-2 md:pl-5 md:pr-3">

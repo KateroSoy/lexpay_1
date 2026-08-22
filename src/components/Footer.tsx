@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Footer() {
   return (
-    <footer className="bg-bg-card text-text-primary pt-24 pb-12 mt-auto">
+    <footer className="bg-bg-card text-text-primary pt-24 pb-12 max-md:pb-36 mt-auto">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-1">
@@ -54,14 +54,13 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border-main opacity-60 text-text-secondary text-sm gap-4">
+        <div className="flex flex-wrap justify-center md:justify-between items-center pt-6 border-t border-border-main opacity-60 text-text-secondary text-[11px] sm:text-sm gap-x-5 gap-y-3">
           <p>LEXPAY &copy; 2026</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2">
             <Link to="/terms" className="hover:text-text-primary transition-colors">Terms</Link>
             <Link to="/privacy" className="hover:text-text-primary transition-colors">Privacy</Link>
             <Link to="/refund" className="hover:text-text-primary transition-colors">Refund Policy</Link>
-          </div>
-          <div className="flex gap-4">
+            <span className="hidden sm:inline text-border-main">|</span>
             <button className="hover:text-text-primary transition-colors">Indonesia / IDR</button>
           </div>
         </div>

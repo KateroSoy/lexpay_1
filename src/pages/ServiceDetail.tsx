@@ -1,17 +1,29 @@
 import { useParams, Link } from "react-router-dom";
-import { mockServices } from "../data/mockData";
 import { PiArrowLeft, PiStarFill, PiClock, PiMapPin, PiCheckCircle } from "react-icons/pi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "../lib/store";
 import toast from "react-hot-toast";
+import { lexpayApi } from "../lib/api";
+import type { Service } from "../lib/types";
 
 export default function ServiceDetail() {
   const { slug } = useParams();
-  const service = mockServices.find(s => s.slug === slug) || mockServices[0];
+  const [service, setService] = useState<Service | null>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState(0);
   const addItem = useCartStore((state) => state.addItem);
 
+  useEffect(() => {
+    if (!slug) return;
+    setLoading(true);
+    lexpayApi.service(slug)
+      .then(res => setService(res.data))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [slug]);
+
   const handleAddToCart = () => {
+    if (!service) return;
     const option = service.options[selectedOption] || service.options[0];
     addItem({
       id: `${service.id}-${option.name}`,
@@ -27,8 +39,25 @@ export default function ServiceDetail() {
     toast.success(`${service.name} ditambahkan ke keranjang!`);
   };
 
+  if (loading) {
+    return (
+      <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-lex-purple"></div>
+      </div>
+    );
+  }
+
+  if (!service) {
+    return (
+      <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-4">Service Not Found</h1>
+        <Link to="/explore" className="text-lex-purple hover:underline">Go back to Explore</Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="pt-12 md:pt-18 pb-16 bg-bg-card min-h-screen">
+    <div className="pt-24 md:pt-28 pb-16 bg-bg-card min-h-screen">
       <div className="mx-auto max-w-6xl px-3 sm:px-6">
         {/* Compact Breadcrumb */}
         <div className="flex items-center gap-1 text-[11px] font-semibold opacity-70 text-text-secondary mb-2 truncate">

@@ -1,20 +1,72 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# LEXPAY — Demo Storefront + CMS
 
-# Run and deploy your AI Studio app
+Satu aplikasi Vite yang berisi dua bagian:
 
-This contains everything you need to run your app locally.
+| Bagian | Rute | Isi |
+|---|---|---|
+| **Storefront** | `/` | Toko LEXPAY: home, explore, detail produk/layanan, keranjang, checkout, pesanan, akun |
+| **CMS demo** | `/admin` | Dashboard, Produk, Layanan, Produk Digital, Pesanan |
 
-View your app in AI Studio: https://ai.studio/apps/117db56c-dcba-4cf8-a437-7bb20e664e46
+Ini demo UI. Tidak ada server, tidak ada database. Data awal berasal dari
+`src/data/mockData.ts`, disimpan di `localStorage` browser, dan bisa
+dikembalikan lewat tombol **Reset data demo** di sidebar CMS.
 
-## Run Locally
+## Jalankan di lokal
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+Buka `http://localhost:3000` untuk toko dan `http://localhost:3000/admin`
+untuk CMS.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Kredensial demo (sudah terisi otomatis di form login):
+
+```
+demo@lexpay.id / demo
+```
+
+Perintah lain:
+
+```bash
+npm run build     # bundel produksi ke dist/
+npm run preview   # sajikan hasil build
+npm run lint      # tsc --noEmit
+npm test          # vitest
+```
+
+## Deploy ke Vercel
+
+Import repo ini ke Vercel dengan pengaturan berikut:
+
+| Setelan | Nilai |
+|---|---|
+| Framework Preset | Vite |
+| Root Directory | folder ini (`demo/1`) |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+
+Tidak ada environment variable yang wajib diisi.
+
+`vercel.json` sudah mengarahkan semua path ke `index.html`, sehingga
+membuka `/admin/products` langsung dari URL tetap bekerja. `.vercelignore`
+menyingkirkan folder PHP, arsip, dan skrip bantu dari bundel yang diunggah.
+
+## Bagaimana CMS terhubung ke toko
+
+`src/lib/api.ts` adalah satu-satunya pintu data storefront. Ia membaca dari
+`src/lib/cmsStore.ts`, store zustand yang di-seed dari `mockData.ts`. Jadi
+mengubah harga produk di `/admin/products` langsung terlihat di halaman
+produk pada storefront. Selama tidak ada yang diubah, isinya sama persis
+dengan data mock aslinya.
+
+CMS dibangun sebagai mesin resource generik, mengikuti pola Filament: satu
+tabel dan satu form dipakai bersama, dikendalikan deskriptor per-resource di
+`src/pages/admin/resources/`.
+
+## Catatan
+
+`cms_online_store_php/` berisi backend Laravel + Filament dan **tidak ikut
+di-deploy** — Vercel tidak menjalankan PHP. Backend itu punya petunjuk
+setup-nya sendiri di `cms_online_store_php/README.md`.

@@ -17,11 +17,18 @@ import Orders from "./pages/Orders";
 import OrderTracking from "./pages/OrderTracking";
 import Account from "./pages/Account";
 import Business from "./pages/Business";
+import { AdminLayout, RequireAdmin } from "./pages/admin/AdminLayout";
+import { AdminLogin } from "./pages/admin/AdminLogin";
+import { Dashboard } from "./pages/admin/Dashboard";
+import { ResourceList } from "./pages/admin/ResourceList";
+import { ResourceForm } from "./pages/admin/ResourceForm";
+import { NotFoundPanel } from "./pages/admin/NotFoundPanel";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Storefront */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="explore" element={<Explore />} />
@@ -38,6 +45,22 @@ export default function App() {
           <Route path="orders/:id" element={<OrderTracking />} />
           <Route path="account" element={<Account />} />
           <Route path="business" element={<Business />} />
+        </Route>
+
+        {/* Demo CMS — rendered outside the storefront chrome */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <RequireAdmin>
+              <AdminLayout />
+            </RequireAdmin>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path=":resource" element={<ResourceList />} />
+          <Route path=":resource/:id" element={<ResourceForm />} />
+          <Route path="*" element={<NotFoundPanel />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,13 @@
+# The Laravel/Filament CMS is not deployed — the demo CMS lives in src/pages/admin.
+cms_online_store_php/
+
+# Scratch scripts and archives that were sitting in the project root.
+test-*.cjs
+verify-*.cjs
+replace_*.cjs
+*.zip
+docs/
+_archive/
+
+node_modules
+dist

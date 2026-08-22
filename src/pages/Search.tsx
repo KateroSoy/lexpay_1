@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { PiArrowRight, PiMagnifyingGlassBold } from "react-icons/pi";
-import { mockProducts, mockServices, mockDigital } from "../data/mockData";
 import { useCartStore } from "../lib/store";
 import toast from "react-hot-toast";
 import { CategoryFilterTabs } from "../components/CategoryFilterTabs";
 import { ModernSearchBar } from "../components/ModernSearchBar";
 import { motion } from "framer-motion";
+import { lexpayApi } from "../lib/api";
+import type { Product, Service, DigitalItem } from "../lib/types";
 
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,15 +15,31 @@ export default function Search() {
   const [activeTab, setActiveTab] = useState("all");
   const addItem = useCartStore((state) => state.addItem);
 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [digitalItems, setDigitalItems] = useState<DigitalItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    lexpayApi.home()
+      .then(res => {
+        setProducts(res.products || []);
+        setServices(res.services || []);
+        setDigitalItems(res.digitalItems || []);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
   const lowerQuery = query.toLowerCase();
-  const matchedProducts = mockProducts.filter(
-    (p) => p.name.toLowerCase().includes(lowerQuery) || p.category.toLowerCase().includes(lowerQuery)
+  const matchedProducts = products.filter(
+    (p) => p.name.toLowerCase().includes(lowerQuery) || (p.category && p.category.toLowerCase().includes(lowerQuery))
   );
-  const matchedServices = mockServices.filter(
-    (s) => s.name.toLowerCase().includes(lowerQuery) || s.category.toLowerCase().includes(lowerQuery)
+  const matchedServices = services.filter(
+    (s) => s.name.toLowerCase().includes(lowerQuery) || (s.category && s.category.toLowerCase().includes(lowerQuery))
   );
-  const matchedDigital = mockDigital.filter(
-    (d) => d.name.toLowerCase().includes(lowerQuery) || d.category.toLowerCase().includes(lowerQuery)
+  const matchedDigital = digitalItems.filter(
+    (d) => d.name.toLowerCase().includes(lowerQuery) || (d.category && d.category.toLowerCase().includes(lowerQuery))
   );
 
   const totalResults = matchedProducts.length + matchedServices.length + matchedDigital.length;

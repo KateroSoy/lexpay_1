@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { mockProducts, mockServices, mockDigital } from "../data/mockData";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCartStore } from "../lib/store";
 import toast from "react-hot-toast";
 import { CategoryFilterTabs } from "../components/CategoryFilterTabs";
 import { ModernSearchBar } from "../components/ModernSearchBar";
+import { lexpayApi } from "../lib/api";
+import type { Product, Service, DigitalItem } from "../lib/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   PiSparkleThin, 
@@ -21,6 +22,22 @@ export default function Explore() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("all");
   const addItem = useCartStore((state) => state.addItem);
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [digitalItems, setDigitalItems] = useState<DigitalItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    lexpayApi.home()
+      .then(res => {
+        setProducts(res.products || []);
+        setServices(res.services || []);
+        setDigitalItems(res.digitalItems || []);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     // Parse query param e.g. /explore?tab=services
@@ -47,12 +64,12 @@ export default function Explore() {
 
   // Category item counts
   const categoryCounts: Record<string, number> = {
-    all: mockProducts.length + mockServices.length + mockDigital.length,
-    products: mockProducts.length,
-    services: mockServices.length,
-    digital: mockDigital.length,
-    food: mockProducts.filter(p => p.category === "Food").length,
-    technology: mockProducts.filter(p => p.category === "Electronics").length + mockServices.filter(s => s.category === "Digital Agency").length,
+    all: products.length + services.length + digitalItems.length,
+    products: products.length,
+    services: services.length,
+    digital: digitalItems.length,
+    food: products.filter(p => p.category === "Food").length,
+    technology: products.filter(p => p.category === "Electronics").length + services.filter(s => s.category === "Digital Agency").length,
   };
 
   return (
@@ -133,13 +150,18 @@ export default function Explore() {
                     <h2 className="text-xl md:text-2xl font-extrabold text-text-primary tracking-tight">Popular Services</h2>
                   </div>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded border border-border-main text-text-secondary bg-bg-main shadow-xs">
-                    {mockServices.length} Options
+                    {services.length} Options
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {mockServices.map((service) => (
-                    <Link
+                {loading ? (
+                  <div className="flex justify-center p-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-lex-purple"></div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {services.map((service) => (
+                      <Link
                       to={`/services/${service.slug}`}
                       key={service.id}
                       className="group bg-bg-card rounded-[28px] overflow-hidden border border-border-main hover:border-lex-purple/50 shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col justify-between"
@@ -186,6 +208,7 @@ export default function Explore() {
                     </Link>
                   ))}
                 </div>
+                )}
               </motion.div>
             </AnimatePresence>
           )}
@@ -208,13 +231,18 @@ export default function Explore() {
                     <h2 className="text-xl md:text-2xl font-extrabold text-text-primary tracking-tight">Physical Products</h2>
                   </div>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded border border-border-main text-text-secondary bg-bg-main shadow-xs">
-                    {mockProducts.length} Products
+                    {products.length} Products
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                  {mockProducts.map((product) => (
-                    <Link
+                {loading ? (
+                  <div className="flex justify-center p-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-lex-purple"></div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                    {products.map((product) => (
+                      <Link
                       to={`/products/${product.slug}`}
                       key={product.id}
                       className="bg-bg-card rounded-[24px] overflow-hidden group hover:shadow-xl transition-all duration-300 border border-border-main hover:border-lex-purple/40 flex flex-col h-full cursor-pointer"
@@ -245,6 +273,7 @@ export default function Explore() {
                     </Link>
                   ))}
                 </div>
+                )}
               </motion.div>
             </AnimatePresence>
           )}
@@ -267,13 +296,18 @@ export default function Explore() {
                     <h2 className="text-xl md:text-2xl font-extrabold text-text-primary tracking-tight">Digital Top Up</h2>
                   </div>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded border border-border-main text-text-secondary bg-bg-main shadow-xs">
-                    {mockDigital.length} Brands
+                    {digitalItems.length} Brands
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {mockDigital.map((digital) => (
-                    <div
+                {loading ? (
+                  <div className="flex justify-center p-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-lex-purple"></div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {digitalItems.map((digital) => (
+                      <div
                       key={digital.id}
                       className="bg-bg-card rounded-[28px] p-6 border border-border-main hover:border-lex-purple/40 shadow-sm hover:shadow-xl transition-all"
                     >
@@ -325,6 +359,7 @@ export default function Explore() {
                     </div>
                   ))}
                 </div>
+                )}
               </motion.div>
             </AnimatePresence>
           )}

@@ -1,6 +1,5 @@
 import { Hero } from "./home-sections/Hero";
 import { Trust } from "./home-sections/Trust";
-import { Ecosystem } from "./home-sections/Ecosystem";
 import { ShopServices } from "./home-sections/ShopServices";
 import { ServicesDiscovery } from "./home-sections/ServicesDiscovery";
 import { DigitalProducts } from "./home-sections/DigitalProducts";
@@ -17,7 +16,6 @@ export default function Home() {
       <DigitalProducts />
       <FeaturedProducts />
       <Trust />
-      <Ecosystem />
       <ShopServices />
       <ServicesDiscovery />
       <Recommendations />
